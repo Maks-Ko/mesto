@@ -1,0 +1,10 @@
+.profileInfo__button {
+    width: 24px;
+    height: 24px;
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 1);
+    background-image: url(../../../images/Vector.png);
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
