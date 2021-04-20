@@ -1,0 +1,6 @@
+.element__lable {
+    display: flex;
+    justify-content: space-between;
+    max-width: 246px;
+    margin: 25px 15px 30px 20px;
+}
