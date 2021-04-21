@@ -8,4 +8,10 @@
     position: absolute;
     top: -40px;
     left: 500px;
+    transition: opacity 1s ease-in-out;
+}
+
+.popup__button:hover {
+    opacity: .6;
+    cursor: url(../../../images/Layer.png), pointer;
 }

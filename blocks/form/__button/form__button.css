@@ -9,4 +9,10 @@
     font-size: 18px;
     line-height: 22px;
     color: #FFFFFF;
+    transition: opacity 1s ease-in-out;
+}
+
+.form__button:hover {
+    opacity: .8;
+    cursor: url(../../../images/Layer.png), pointer;
 }
