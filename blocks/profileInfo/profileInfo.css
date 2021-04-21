@@ -1,5 +1,4 @@
 .profileInfo {
-    min-width: 336px;
     margin-right: auto;
     display: grid;
     grid-template-columns: max-content 24px;
