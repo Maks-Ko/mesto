@@ -7,3 +7,10 @@
     grid-column: 1 / span 2;
     grid-row: 2;
 }
+
+@media (max-width: 450px) {
+    .profileInfo__text {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

@@ -8,3 +8,9 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+@media (max-width: 730px) {
+    .profile__button {
+        width: 282px;
+    }
+}

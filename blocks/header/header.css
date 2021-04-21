@@ -1,6 +1,12 @@
 .header {
-    margin: 40px auto 45px;
-    padding-bottom: 40px;
+    margin: 45px auto 40px;
     max-width: 880px;
     border-bottom: 1px solid rgba(84, 84, 84, 0.75);
 }
+
+@media (max-width: 450px) {
+    .header {
+        margin: 28px auto 40px;        
+    }
+}
+

@@ -5,3 +5,11 @@
     gap: 16px 18px;
     align-items: center;
 }
+
+@media (max-width: 730px) {
+    .profileInfo {
+        margin: 0 0 36px;
+        gap: 10px 14px;
+    }
+    
+}
