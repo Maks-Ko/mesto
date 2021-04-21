@@ -16,3 +16,12 @@
     opacity: .8;
     cursor: url(../../../images/Layer.png), pointer;
 }
+
+@media (max-width: 730px) {
+    .form__button {
+        height: 46px;
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

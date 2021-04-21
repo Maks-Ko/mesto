@@ -15,3 +15,13 @@
     opacity: .6;
     cursor: url(../../../images/Layer.png), pointer;
 }
+
+@media (max-width: 730px) {
+    .popup__button {
+        width: 26px;
+        height: 26px;
+        background-size: 26px 26px;
+        top: -40px;
+        left: 260px;
+    }
+}

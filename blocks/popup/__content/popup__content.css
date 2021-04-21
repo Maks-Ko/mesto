@@ -7,3 +7,12 @@
     border-radius: 10px;
     padding: 34px 36px 37px;
 }
+
+@media (max-width: 730px) {
+    .popup__content {
+        max-width: 238px;
+        width: 100%;
+        padding: 25px 22px;
+    }
+
+}

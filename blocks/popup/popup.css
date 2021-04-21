@@ -1,8 +1,7 @@
 .popup {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    padding-top: 195px;
     background-color: rgba(0, 0, 0, .5);
     position: fixed;
     top: 0;
