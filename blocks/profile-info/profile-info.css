@@ -1,4 +1,4 @@
-.profileInfo {
+.profile-info {
     margin-right: auto;
     display: grid;
     grid-template-columns: max-content 24px;
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 730px) {
-    .profileInfo {
+    .profile-info {
         margin: 0 0 36px;
         gap: 10px 14px;
     }

@@ -1,4 +1,4 @@
-.profileInfo__button {
+.profile-info__button {
     width: 24px;
     height: 24px;
     background-color: #000000;
@@ -10,14 +10,14 @@
     transition: opacity 1s ease-in-out;
 }
 
-.profileInfo__button:hover {
+.profile-info__button:hover {
     opacity: .6;
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 100%), url(../../../images/Vector.png);
     cursor: url(../../../images/Layer.png), pointer;
 }
 
 @media (max-width: 450px) {
-    .profileInfo__button {
+    .profile-info__button {
         width: 18px;
         height: 18px;
         background-size: 7.5px 7.5px;
