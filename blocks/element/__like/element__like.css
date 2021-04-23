@@ -3,4 +3,10 @@
     height: 19px;
     margin-top: 5px;
     margin-right: 5px;
+    transition: opacity 1s ease-in-out;
+}
+
+.element__like:hover {
+    opacity: .5;
+    cursor: url(../../../images/Layer.png), pointer;
 }
