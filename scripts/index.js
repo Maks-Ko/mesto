@@ -37,7 +37,9 @@ function formSubmitHandler (event) {
     let aboutMeAvatar = document.querySelector('.profileInfo__text');   // Выберите элементы, куда должны быть вставлены значения полей
 
     nameAvatar.textContent = nameInputV;
-    aboutMeAvatar.textContent = aboutMeInputV; // Вставьте новые значения с помощью textContent    
+    aboutMeAvatar.textContent = aboutMeInputV; // Вставьте новые значения с помощью textContent
+
+    togglePopup(event);
 }
 
 // Прикрепляем обработчик к форме:
@@ -45,4 +47,4 @@ function formSubmitHandler (event) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 //const closeForm = formElement.querySelector('.form__button');
-formElement.addEventListener('submit', togglePopup);
+//formElement.addEventListener('submit', togglePopup);
