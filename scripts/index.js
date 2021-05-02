@@ -95,3 +95,24 @@ const initialCards = [
     
     elementFoto.append(cardElement);
   });
+
+// popup mesto  
+const popupMesto = document.querySelector('.popup_mesto');
+const openPopupMesto = document.querySelector('.profile__button');
+const closePopupMesto = document.querySelector('.popup__button_mesto')
+
+function togglePopupMesto(event) {
+    event.preventDefault();
+    popupMesto.classList.toggle('popup_is-opened');
+
+}
+openPopupMesto.addEventListener('click', togglePopupMesto);
+closePopupMesto.addEventListener('click', togglePopupMesto);
+
+function handleOverlayClickMesto(event) {
+    if (event.target === event.currentTarget) {
+        togglePopupMesto(event);
+    }
+}
+
+popupMesto.addEventListener('click', handleOverlayClickMesto);
