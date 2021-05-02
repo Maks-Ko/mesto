@@ -119,7 +119,6 @@ function handleOverlayClickMesto(event) {
 popupMesto.addEventListener('click', handleOverlayClickMesto);
 
 // add cards
-
 let formMesto = popupMesto.querySelector('.form');
 let inputNameMesto = formMesto.querySelector('.form__text_edit_name');
 let inputFotoMesto = formMesto.querySelector('.form__text_edit_about-me');
@@ -143,3 +142,13 @@ function formSubmitHandlerMesto (event) {
 }
 
 formMesto.addEventListener('submit', formSubmitHandlerMesto);
+
+// likes
+const likeButten = document.querySelectorAll('.element__like');
+
+likeButten.forEach(function(like) {
+    like.addEventListener('click', function(){
+        //let likeButten = document.querySelector('.element__like');
+        like.classList.toggle('element__like_active');
+    });
+});
