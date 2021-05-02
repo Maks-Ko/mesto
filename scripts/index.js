@@ -1,11 +1,6 @@
 const openPopupButten = document.querySelector('.profile-info__button');
 const popup = document.querySelector('.popup');
 const closePopupButten = document.querySelector('.popup__button');
-let nameAvatar = document.querySelector('.profile-info__title');
-let aboutMeAvatar = document.querySelector('.profile-info__text'); 
-let formElement = document.querySelector('.form');
-let nameInput = formElement.querySelector('.form__text_edit_name');
-let aboutMeInput = formElement.querySelector('.form__text_edit_about-me');
 
 function togglePopup(event) {
     event.preventDefault();
@@ -25,6 +20,12 @@ function handleOverlayClick(event) {
 
 popup.addEventListener('click', handleOverlayClick);
 
+
+let nameAvatar = document.querySelector('.profile-info__title');
+let aboutMeAvatar = document.querySelector('.profile-info__text'); 
+let formElement = document.querySelector('.form');
+let nameInput = formElement.querySelector('.form__text_edit_name');
+let aboutMeInput = formElement.querySelector('.form__text_edit_about-me');
 // Находим форму в DOM
 //let formElement = document.querySelector('.form');  // Воспользуйтесь методом querySelector()
 
@@ -116,3 +117,29 @@ function handleOverlayClickMesto(event) {
 }
 
 popupMesto.addEventListener('click', handleOverlayClickMesto);
+
+// add cards
+
+let formMesto = popupMesto.querySelector('.form');
+let inputNameMesto = formMesto.querySelector('.form__text_edit_name');
+let inputFotoMesto = formMesto.querySelector('.form__text_edit_about-me');
+
+function formSubmitHandlerMesto (event) {
+    event.preventDefault();
+
+    let inputNameMestoV = inputNameMesto.value;
+    let inputFotoMestoV = inputFotoMesto.value;
+
+    const cardTemplate = document.querySelector('#element-template').content;
+    const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+
+    cardElement.querySelector('.element__title').textContent = inputNameMestoV;
+    cardElement.querySelector('.element__foto').src = inputFotoMestoV;
+    cardElement.querySelector('.element__foto').alt = inputNameMestoV;
+    
+    elementFoto.prepend(cardElement);
+
+    togglePopupMesto(event);
+}
+
+formMesto.addEventListener('submit', formSubmitHandlerMesto);
