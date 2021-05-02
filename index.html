@@ -21,49 +21,7 @@
                 <button type="button" class="profile__button"></button>
             </section>
             <section>
-                <ul class="elements">
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Древний храм в горах" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Карачаевск</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Гора Эльбрус</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Домбай</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Гора Эльбрус</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Гора" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Домбай</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Древний храм в горах" class="element__foto">
-                        <div class="element__lable">
-                            <p class="element__title">Карачаево-Черкессия</p>
-                            <button type="button" class="element__like element__like_active"></button>
-                        </div>
-                    </li>
+                <ul class="elements">                    
                 </ul>
             </section>
         </main>
@@ -83,6 +41,15 @@
                 </form>
             </div>
         </div>
+        <template id="element-template">
+            <li class="element">
+                <img src="" alt="" class="element__foto">
+                <div class="element__lable">
+                    <p class="element__title"></p>
+                    <button type="button" class="element__like element__like_active"></button>
+                </div>
+            </li>
+        </template>
         <script src="./scripts/index.js"></script>
     </body>
 </html>
