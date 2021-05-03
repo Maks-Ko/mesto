@@ -1,6 +1,4 @@
 .element {
-    /*background-image: url(../../images/kirill-pershin-1088404-unsplash.jpg);
-    background-repeat: no-repeat;
-    background-size: contain;*/
+    position: relative;
     background-color: #FFFFFF;
     border-radius: 10px 10px 10px 10px;}
