@@ -20,18 +20,18 @@ function handleOverlayClick(event) {
 
 popup.addEventListener('click', handleOverlayClick);
 
+// Находим форму в DOM
+// Воспользуйтесь методом querySelector()
 
+// Находим поля формы в DOM
+// Воспользуйтесь инструментом .querySelector()
+// Воспользуйтесь инструментом .querySelector()
 let nameAvatar = document.querySelector('.profile-info__title');
-let aboutMeAvatar = document.querySelector('.profile-info__text'); 
+let aboutMeAvatar = document.querySelector('.profile-info__text');
 let formElement = document.querySelector('.form');
 let nameInput = formElement.querySelector('.form__text_edit_name');
 let aboutMeInput = formElement.querySelector('.form__text_edit_about-me');
-// Находим форму в DOM
-//let formElement = document.querySelector('.form');  // Воспользуйтесь методом querySelector()
 
-// Находим поля формы в DOM
-//let nameInput = formElement.querySelector('.form__text_edit_name');    // Воспользуйтесь инструментом .querySelector()
-//let aboutMeInput = formElement.querySelector('.form__text_edit_about-me'); // Воспользуйтесь инструментом .querySelector()
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function formSubmitHandler (event) {
@@ -56,6 +56,37 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 //const closeForm = formElement.querySelector('.form__button');
 //formElement.addEventListener('submit', togglePopup);
+
+
+// popup mesto  
+const popupMesto = document.querySelector('.popup_mesto');
+const openPopupMesto = document.querySelector('.profile__button');
+const closePopupMesto = document.querySelector('.popup__button_mesto')
+
+function togglePopupMesto(event) {
+    event.preventDefault();
+    popupMesto.classList.toggle('popup_is-opened');
+
+}
+openPopupMesto.addEventListener('click', togglePopupMesto);
+closePopupMesto.addEventListener('click', togglePopupMesto);
+
+function handleOverlayClickMesto(event) {
+    if (event.target === event.currentTarget) {
+        togglePopupMesto(event);
+    }
+}
+
+popupMesto.addEventListener('click', handleOverlayClickMesto);
+
+
+
+//cards
+const formMesto = popupMesto.querySelector('.form');
+const inputCardMesto = popupMesto.querySelector('.form__text_edit_name');
+const inputCardPhto = popupMesto.querySelector('.form__text_edit_about-me');
+const cardContainer = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#element-template');
 
 const initialCards = [
     {
@@ -82,73 +113,52 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ];
+];
 
-  const elementFoto = document.querySelector('.elements');
+function card (card) {
+  const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
+  const likeButten = newCard.querySelector('.element__like');
+  const cardDeleteButten = newCard.querySelector('.element__delete');  
+ 
+  newCard.querySelector('.element__title').textContent = card.name;
+  newCard.querySelector('.element__foto').src = card.link;
+  newCard.querySelector('.element__foto').alt = card.name;
 
-  initialCards.forEach(function(element) {
-    const cardTemplate = document.querySelector('#element-template').content;
-    const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-
-    cardElement.querySelector('.element__title').textContent = element.name;
-    cardElement.querySelector('.element__foto').src = element.link;
-    cardElement.querySelector('.element__foto').alt = element.name;
-    
-    elementFoto.append(cardElement);
+  likeButten.addEventListener('click', function(like) {
+    like.target.closest('.element__like').classList.toggle('element__like_active');
   });
 
-// popup mesto  
-const popupMesto = document.querySelector('.popup_mesto');
-const openPopupMesto = document.querySelector('.profile__button');
-const closePopupMesto = document.querySelector('.popup__button_mesto')
+  cardDeleteButten.addEventListener('click', function(del) {
+    del.target.closest('.element').remove();
+  });
 
-function togglePopupMesto(event) {
-    event.preventDefault();
-    popupMesto.classList.toggle('popup_is-opened');
-
-}
-openPopupMesto.addEventListener('click', togglePopupMesto);
-closePopupMesto.addEventListener('click', togglePopupMesto);
-
-function handleOverlayClickMesto(event) {
-    if (event.target === event.currentTarget) {
-        togglePopupMesto(event);
-    }
+  return newCard;
 }
 
-popupMesto.addEventListener('click', handleOverlayClickMesto);
+initialCards.forEach(function(cards) {
+  const newCards = card(cards);
+  cardContainer.append(newCards);
+});
 
-// add cards
-let formMesto = popupMesto.querySelector('.form');
-let inputNameMesto = formMesto.querySelector('.form__text_edit_name');
-let inputFotoMesto = formMesto.querySelector('.form__text_edit_about-me');
-
+// add card 
 function formSubmitHandlerMesto (event) {
-    event.preventDefault();
+  event.preventDefault();
+  
+  const inputCardMestoV = inputCardMesto.value;
+  const inputCardPhtoV = inputCardPhto.value;
+  const arrayInput = [
+    {
+      name: `${inputCardMestoV}`,
+      link: `${inputCardPhtoV}`
+    }
+  ];
+  
+  arrayInput.forEach(function(cards) {
+    const newCardForm = card(cards);
+    cardContainer.prepend(newCardForm);
+  });
 
-    let inputNameMestoV = inputNameMesto.value;
-    let inputFotoMestoV = inputFotoMesto.value;
-
-    const cardTemplate = document.querySelector('#element-template').content;
-    const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-
-    cardElement.querySelector('.element__title').textContent = inputNameMestoV;
-    cardElement.querySelector('.element__foto').src = inputFotoMestoV;
-    cardElement.querySelector('.element__foto').alt = inputNameMestoV;
-    
-    elementFoto.prepend(cardElement);
-
-    togglePopupMesto(event);
+  togglePopupMesto(event);
 }
 
 formMesto.addEventListener('submit', formSubmitHandlerMesto);
-
-// likes
-const likeButten = document.querySelectorAll('.element__like');
-
-likeButten.forEach(function(like) {
-    like.addEventListener('click', function(){
-        //let likeButten = document.querySelector('.element__like');
-        like.classList.toggle('element__like_active');
-    });
-});
