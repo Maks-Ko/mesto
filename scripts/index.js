@@ -68,6 +68,7 @@ function togglePopupMesto(event) {
     popupMesto.classList.toggle('popup_is-opened');
 
 }
+
 openPopupMesto.addEventListener('click', togglePopupMesto);
 closePopupMesto.addEventListener('click', togglePopupMesto);
 
@@ -78,8 +79,6 @@ function handleOverlayClickMesto(event) {
 }
 
 popupMesto.addEventListener('click', handleOverlayClickMesto);
-
-
 
 //cards
 const formMesto = popupMesto.querySelector('.form');
@@ -118,8 +117,8 @@ const initialCards = [
 function card (card) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   const likeButten = newCard.querySelector('.element__like');
-  const cardDeleteButten = newCard.querySelector('.element__delete');  
- 
+  const cardDeleteButten = newCard.querySelector('.element__delete');
+   
   newCard.querySelector('.element__title').textContent = card.name;
   newCard.querySelector('.element__foto').src = card.link;
   newCard.querySelector('.element__foto').alt = card.name;
@@ -162,3 +161,47 @@ function formSubmitHandlerMesto (event) {
 }
 
 formMesto.addEventListener('submit', formSubmitHandlerMesto);
+
+// попап
+// текст
+// при нажатии на картинку
+
+//popup images
+const popupImage = document.querySelector('.popup_for_image');
+const openPopupImage = document.querySelectorAll('.element__foto');
+const closePopupImage = popupImage.querySelector('.images-content__button');
+
+let popupImageContent = popupImage.querySelector('.images-content__foto');
+let popupImageTitle = popupImage.querySelector('.images-content__title');
+
+function togglePopupImage() {
+  popupImage.classList.toggle('popup_is-opened');
+}
+
+openPopupImage.forEach(function (images) {
+  images.addEventListener('click', function() {
+    popupImageContent.src = images.src;
+    popupImageTitle.textContent = images.alt;
+    togglePopupImage();
+  });
+})
+
+closePopupImage.addEventListener('click', togglePopupImage);
+
+function handleOverlayClickImage(event) {
+  if (event.target === event.currentTarget) {
+    togglePopupImage(event);
+  }
+}
+
+popupImage.addEventListener('click', handleOverlayClickImage);
+
+/*
+function popupImForm () {
+  const foto = document.querySelector('.element__foto');
+  popupImageContent = foto.src;
+  popupImageTitle = foto.alt;
+  console.log(popupImageContent);
+  console.log(popupImageTitle);
+};
+*/

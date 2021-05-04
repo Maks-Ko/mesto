@@ -1,0 +1,6 @@
+.images-content__foto {
+    display: block;
+    max-width: 75vw;
+    max-height: 75vh;
+    /*width: 100%;*/
+}
