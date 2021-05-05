@@ -16,7 +16,7 @@ closeEditProfileButton.addEventListener('click', function() {
 
 function handleOverlayClick(event) {
   const classNameEditProfile = 'popup popup_for_profile popup_is-opened';
-  const classNamepopupAddCard = 'popup popup_mesto popup_is-opened';
+  const classNamepopupAddCard = 'popup popup_for_cards popup_is-opened';
   const classNamePopupImage = 'popup popup_for_image popup_is-opened';
 
   if (event.target === event.currentTarget && popupEditProfile.className === classNameEditProfile) {
@@ -56,9 +56,9 @@ function formEditProfileSubmitHandler (event) {
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 // popup mesto  
-const popupAddCard = document.querySelector('.popup_mesto');
+const popupAddCard = document.querySelector('.popup_for_cards');
 const openPopupAddCard = document.querySelector('.profile__button');
-const closePopupAddCard = document.querySelector('.popup__button_mesto')
+const closePopupAddCard = document.querySelector('.popup__button_card')
 
 openPopupAddCard.addEventListener('click', function() {
   togglePopup(popupAddCard);
