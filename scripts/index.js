@@ -5,35 +5,33 @@ const closeEditProfileButton = document.querySelector('.popup__button');
 
 function toggleEditProfile(event) {
     event.preventDefault();
-    nameInput.value = nameAvatar.textContent;
-    aboutMeInput.value = aboutMeAvatar.textContent;
     popupEditProfile.classList.toggle('popup_is-opened');
 }
 
 openEditProfileButton.addEventListener('click', toggleEditProfile);
 closeEditProfileButton.addEventListener('click', toggleEditProfile);
-/*
+
 function handleOverlayClick(event) {
-  
-  if (event.target === event.currentTarget) {
+  const classNameEditProfile = 'popup popup_for_profile popup_is-opened';
+  const classNamepopupAddCard = 'popup popup_mesto popup_is-opened';
+  const classNamePopupImage = 'popup popup_for_image popup_is-opened';
+
+  if (event.target === event.currentTarget && popupEditProfile.className === classNameEditProfile) {
+    console.log(popupEditProfile.className);
     toggleEditProfile(event);
   }
   
-  else if (event.target === event.currentTarget) {
-    console.log(event.target);
-    console.log(popupAddCard);
+  else if (event.target === event.currentTarget && popupAddCard.className === classNamepopupAddCard) {
     togglePopupAddCard(event);
   }
 
-  else if (event.target === event.currentTarget) {
-    console.log(popupImage);
+  else if (event.target === event.currentTarget && popupImage.className === classNamePopupImage) {
     togglePopupImage(event);
   }
-
 }
 
 popupEditProfile.addEventListener('click', handleOverlayClick);
-*/
+
 const nameAvatar = document.querySelector('.profile-info__title');
 const aboutMeAvatar = document.querySelector('.profile-info__text');
 const formEditProfile = document.querySelector('.form');
@@ -68,19 +66,10 @@ function togglePopupAddCard(event) {
 
 openPopupAddCard.addEventListener('click', togglePopupAddCard);
 closePopupAddCard.addEventListener('click', togglePopupAddCard);
-
-/*
-function handleOverlayClickMesto(event) {
-    if (event.target === event.currentTarget) {
-        togglePopupAddCard(event);
-    }
-}
-
 popupAddCard.addEventListener('click', handleOverlayClick);
-*/
-//cards
+
 const formAddCard = popupAddCard.querySelector('.form');
-const inputCardMesto = popupAddCard.querySelector('.form__text_edit_name');
+const inputCardName = popupAddCard.querySelector('.form__text_edit_name');
 const inputCardPhto = popupAddCard.querySelector('.form__text_edit_about-me');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element-template');
@@ -124,8 +113,10 @@ function formAddCardSubmitHandler (event) {
 
   const cardElementFoto = {};  
   
-  cardElementFoto.name = inputCardMesto.value;
+  cardElementFoto.name = inputCardName.value;
   cardElementFoto.link = inputCardPhto.value;
+  inputCardName.value = '';
+  inputCardPhto.value = '';
 
   const newCardForm = createCard(cardElementFoto);
 
@@ -135,7 +126,7 @@ function formAddCardSubmitHandler (event) {
 
 formAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
-//popup каринок
+//popup картинок
 const popupImage = document.querySelector('.popup_for_image');
 const closePopupImage = popupImage.querySelector('.images-content__button');
 const popupImageContent = popupImage.querySelector('.images-content__foto');
@@ -146,12 +137,4 @@ function togglePopupImage() {
 }
 
 closePopupImage.addEventListener('click', togglePopupImage);
-/*
-function handleOverlayClickImage(event) {
-  if (event.target === event.currentTarget) {
-    togglePopupImage(event);
-  }
-}
-
 popupImage.addEventListener('click', handleOverlayClick);
-*/
