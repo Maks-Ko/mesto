@@ -1,89 +1,73 @@
-const openPopupButten = document.querySelector('.profile-info__button');
-const popup = document.querySelector('.popup');
-const closePopupButten = document.querySelector('.popup__button');
+//popup изменения профиля
+const openEditProfileButton = document.querySelector('.profile-info__button');
+const popupEditProfile = document.querySelector('.popup_for_profile');
+const closeEditProfileButton = document.querySelector('.popup__button');
 
-function togglePopup(event) {
+function toggleEditProfile(event) {
     event.preventDefault();
     nameInput.value = nameAvatar.textContent;
     aboutMeInput.value = aboutMeAvatar.textContent;
-    popup.classList.toggle('popup_is-opened');
+    popupEditProfile.classList.toggle('popup_is-opened');
 }
 
-openPopupButten.addEventListener('click', togglePopup);
-closePopupButten.addEventListener('click', togglePopup);
+openEditProfileButton.addEventListener('click', toggleEditProfile);
+closeEditProfileButton.addEventListener('click', toggleEditProfile);
 
 function handleOverlayClick(event) {
     if (event.target === event.currentTarget) {
-        togglePopup(event);
+        toggleEditProfile(event);
     }
 }
 
-popup.addEventListener('click', handleOverlayClick);
+popupEditProfile.addEventListener('click', handleOverlayClick);
 
-// Находим форму в DOM
-// Воспользуйтесь методом querySelector()
+const nameAvatar = document.querySelector('.profile-info__title');
+const aboutMeAvatar = document.querySelector('.profile-info__text');
+const formEditProfile = document.querySelector('.form');
+const nameInput = formEditProfile.querySelector('.form__text_edit_name');
+const aboutMeInput = formEditProfile.querySelector('.form__text_edit_about-me');
 
-// Находим поля формы в DOM
-// Воспользуйтесь инструментом .querySelector()
-// Воспользуйтесь инструментом .querySelector()
-let nameAvatar = document.querySelector('.profile-info__title');
-let aboutMeAvatar = document.querySelector('.profile-info__text');
-let formElement = document.querySelector('.form');
-let nameInput = formElement.querySelector('.form__text_edit_name');
-let aboutMeInput = formElement.querySelector('.form__text_edit_about-me');
+// функция изменения профиля
+function formEditProfileSubmitHandler (event) {
+  event.preventDefault();
 
+  const userName = nameInput.value;
+  const userProfession = aboutMeInput.value;
 
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
-function formSubmitHandler (event) {
-    event.preventDefault();   // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-    let nameInputV = nameInput.value;
-    let aboutMeInputV = aboutMeInput.value;    // Получите значение полей jobInput и nameInput из свойства value
-
-    //let nameAvatar = document.querySelector('.profileInfo__title');
-    //let aboutMeAvatar = document.querySelector('.profileInfo__text');   // Выберите элементы, куда должны быть вставлены значения полей
-
-    nameAvatar.textContent = nameInputV;
-    aboutMeAvatar.textContent = aboutMeInputV; // Вставьте новые значения с помощью textContent
-
-    togglePopup(event);
+  nameAvatar.textContent = userName;
+  aboutMeAvatar.textContent = userProfession;
+  
+  toggleEditProfile(event);
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
-
-//const closeForm = formElement.querySelector('.form__button');
-//formElement.addEventListener('submit', togglePopup);
-
+formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 // popup mesto  
-const popupMesto = document.querySelector('.popup_mesto');
-const openPopupMesto = document.querySelector('.profile__button');
-const closePopupMesto = document.querySelector('.popup__button_mesto')
+const popupAddCard = document.querySelector('.popup_mesto');
+const openPopupAddCard = document.querySelector('.profile__button');
+const closePopupAddCard = document.querySelector('.popup__button_mesto')
 
-function togglePopupMesto(event) {
+function togglePopupAddCard(event) {
     event.preventDefault();
-    popupMesto.classList.toggle('popup_is-opened');
+    popupAddCard.classList.toggle('popup_is-opened');
 
 }
 
-openPopupMesto.addEventListener('click', togglePopupMesto);
-closePopupMesto.addEventListener('click', togglePopupMesto);
+openPopupAddCard.addEventListener('click', togglePopupAddCard);
+closePopupAddCard.addEventListener('click', togglePopupAddCard);
 
 function handleOverlayClickMesto(event) {
     if (event.target === event.currentTarget) {
-        togglePopupMesto(event);
+        togglePopupAddCard(event);
     }
 }
 
-popupMesto.addEventListener('click', handleOverlayClickMesto);
+popupAddCard.addEventListener('click', handleOverlayClickMesto);
 
 //cards
-const formMesto = popupMesto.querySelector('.form');
-const inputCardMesto = popupMesto.querySelector('.form__text_edit_name');
-const inputCardPhto = popupMesto.querySelector('.form__text_edit_about-me');
+const formMesto = popupAddCard.querySelector('.form');
+const inputCardMesto = popupAddCard.querySelector('.form__text_edit_name');
+const inputCardPhto = popupAddCard.querySelector('.form__text_edit_about-me');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element-template');
 
@@ -114,20 +98,20 @@ const initialCards = [
     }
 ];
 
-function card (card) {
+function createCard (card) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
-  const likeButten = newCard.querySelector('.element__like');
-  const cardDeleteButten = newCard.querySelector('.element__delete');
+  const likeButton = newCard.querySelector('.element__like');
+  const cardDeleteButton = newCard.querySelector('.element__delete');
    
   newCard.querySelector('.element__title').textContent = card.name;
   newCard.querySelector('.element__foto').src = card.link;
   newCard.querySelector('.element__foto').alt = card.name;
 
-  likeButten.addEventListener('click', function(like) {
+  likeButton.addEventListener('click', function(like) {
     like.target.closest('.element__like').classList.toggle('element__like_active');
   });
 
-  cardDeleteButten.addEventListener('click', function(del) {
+  cardDeleteButton.addEventListener('click', function(del) {
     del.target.closest('.element').remove();
   });
 
@@ -135,44 +119,40 @@ function card (card) {
 }
 
 initialCards.forEach(function(cards) {
-  const newCards = card(cards);
+  const newCards = createCard(cards);
   cardContainer.append(newCards);
 });
 
 // add card 
-function formSubmitHandlerMesto (event) {
+function formAddCardSubmitHandler (event) {
   event.preventDefault();
   
-  const inputCardMestoV = inputCardMesto.value;
-  const inputCardPhtoV = inputCardPhto.value;
+  const cardTitle = inputCardMesto.value;
+  const cardLink = inputCardPhto.value;
   const arrayInput = [
     {
-      name: `${inputCardMestoV}`,
-      link: `${inputCardPhtoV}`
+      name: `${cardTitle}`,
+      link: `${cardLink}`
     }
   ];
   
   arrayInput.forEach(function(cards) {
-    const newCardForm = card(cards);
+    const newCardForm = createCard(cards);
     cardContainer.prepend(newCardForm);
   });
 
-  togglePopupMesto(event);
+  togglePopupAddCard(event);
 }
 
-formMesto.addEventListener('submit', formSubmitHandlerMesto);
-
-// попап
-// текст
-// при нажатии на картинку
+formMesto.addEventListener('submit', formAddCardSubmitHandler);
 
 //popup images
 const popupImage = document.querySelector('.popup_for_image');
 const openPopupImage = document.querySelectorAll('.element__foto');
 const closePopupImage = popupImage.querySelector('.images-content__button');
 
-let popupImageContent = popupImage.querySelector('.images-content__foto');
-let popupImageTitle = popupImage.querySelector('.images-content__title');
+const popupImageContent = popupImage.querySelector('.images-content__foto');
+const popupImageTitle = popupImage.querySelector('.images-content__title');
 
 function togglePopupImage() {
   popupImage.classList.toggle('popup_is-opened');
@@ -195,13 +175,3 @@ function handleOverlayClickImage(event) {
 }
 
 popupImage.addEventListener('click', handleOverlayClickImage);
-
-/*
-function popupImForm () {
-  const foto = document.querySelector('.element__foto');
-  popupImageContent = foto.src;
-  popupImageTitle = foto.alt;
-  console.log(popupImageContent);
-  console.log(popupImageTitle);
-};
-*/
