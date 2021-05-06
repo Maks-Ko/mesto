@@ -1,6 +1,6 @@
 //popup изменения профиля
 const openEditProfileButton = document.querySelector('.profile-info__button');
-const popupEditProfile = document.querySelector('.popup_for_profile');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const closeEditProfileButton = document.querySelector('.popup__button');
 
 function togglePopup(event) {
@@ -15,9 +15,9 @@ closeEditProfileButton.addEventListener('click', function() {
 });
 
 function handleOverlayClick(event) {
-  const classNameEditProfile = 'popup popup_for_profile popup_is-opened';
-  const classNamepopupAddCard = 'popup popup_for_cards popup_is-opened';
-  const classNamePopupImage = 'popup popup_for_image popup_is-opened';
+  const classNameEditProfile = 'popup popup_type_edit-profile popup_is-opened';
+  const classNamepopupAddCard = 'popup popup_type_add-card popup_is-opened';
+  const classNamePopupImage = 'popup popup_type_image popup_is-opened';
 
   if (event.target === event.currentTarget && popupEditProfile.className === classNameEditProfile) {
     togglePopup(popupEditProfile);
@@ -56,7 +56,7 @@ function formEditProfileSubmitHandler (event) {
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 // popup mesto  
-const popupAddCard = document.querySelector('.popup_for_cards');
+const popupAddCard = document.querySelector('.popup_type_add-card');
 const openPopupAddCard = document.querySelector('.profile__button');
 const closePopupAddCard = document.querySelector('.popup__button_card')
 
@@ -127,7 +127,7 @@ function formAddCardSubmitHandler (event) {
 formAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
 //popup картинок
-const popupImage = document.querySelector('.popup_for_image');
+const popupImage = document.querySelector('.popup_type_image');
 const closePopupImage = popupImage.querySelector('.images-content__button');
 const popupImageContent = popupImage.querySelector('.images-content__foto');
 const popupImageTitle = popupImage.querySelector('.images-content__title');
