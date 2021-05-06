@@ -15,20 +15,9 @@ closeEditProfileButton.addEventListener('click', function() {
 });
 
 function handleOverlayClick(event) {
-  const classNameEditProfile = 'popup popup_type_edit-profile popup_is-opened';
-  const classNamepopupAddCard = 'popup popup_type_add-card popup_is-opened';
-  const classNamePopupImage = 'popup popup_type_image popup_is-opened';
-
-  if (event.target === event.currentTarget && popupEditProfile.className === classNameEditProfile) {
-    togglePopup(popupEditProfile);
-  }
-  
-  else if (event.target === event.currentTarget && popupAddCard.className === classNamepopupAddCard) {
-    togglePopup(popupAddCard);
-  }
-
-  else if (event.target === event.currentTarget && popupImage.className === classNamePopupImage) {
-    togglePopup(popupImage);
+  const openPopup = document.querySelector('.popup_is-opened');
+  if (event.target === event.currentTarget) {    
+    togglePopup(openPopup);
   }
 }
 
