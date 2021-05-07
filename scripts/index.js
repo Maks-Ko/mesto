@@ -3,8 +3,8 @@ const openEditProfileButton = document.querySelector('.profile-info__button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const closeEditProfileButton = document.querySelector('.popup__button');
 
-function togglePopup(event) {
-    event.classList.toggle('popup_is-opened');
+function togglePopup(popup) {
+    popup.classList.toggle('popup_is-opened');
 }
 
 openEditProfileButton.addEventListener('click', function() {
