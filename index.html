@@ -34,8 +34,10 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="my_form" class="form">
                     <fieldset class="form__container">
-                        <input type="text" name="user_name" placeholder="Имя" class="form__text form__text_edit_name">
-                        <input type="text" name="activity" placeholder="Вид деятельности" class="form__text form__text_edit_about-me">
+                        <input type="text" name="user_name" placeholder="Имя" class="form__text form__text_edit_name" required minlength="2" maxlength="40">
+                        <span class="form__input-error" id="user_name-error"></span>
+                        <input type="text" name="activity" placeholder="Вид деятельности" class="form__text form__text_edit_about-me" required minlength="2" maxlength="200">
+                        <span class="form__input-error" id="activity-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
@@ -45,10 +47,12 @@
             <div class="popup__content">
                 <button type="button" class="popup__button popup__button_card"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form name="card_form" class="form">
+                <form name="card_form" class="form" novalidate>
                     <fieldset class="form__container">
-                        <input type="text" name="user_name" placeholder="Название" class="form__text form__text_edit_name">
-                        <input type="text" name="activity" placeholder="Ссылка на картинку" class="form__text form__text_edit_about-me">
+                        <input type="text" name="image_name" placeholder="Название" class="form__text form__text_edit_name">
+                        <span class="form__input-error" id="image_name-error"></span>
+                        <input type="url" name="url_image" placeholder="Ссылка на картинку" class="form__text form__text_edit_about-me">
+                        <span class="form__input-error" id="url_image-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
@@ -70,8 +74,9 @@
                     <button type="button" class="element__like"></button>
                 </div>
             </li>
-        </template>        
-        <script src='./scripts/initial-сards.js'></script>
+        </template>
+        <script src="./scripts/validate.js"></script>
+        <script src="./scripts/initial-сards.js"></script>
         <script src="./scripts/index.js"></script>
     </body>
 </html>
