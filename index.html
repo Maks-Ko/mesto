@@ -21,7 +21,7 @@
                 <button type="button" class="profile__button"></button>
             </section>
             <section>
-                <ul class="elements">                    
+                <ul class="elements">
                 </ul>
             </section>
         </main>
@@ -32,12 +32,12 @@
             <div class="popup__content">
                 <button type="button" class="popup__button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form name="my_form" class="form">
+                <form name="my_form" class="form" novalidate>
                     <fieldset class="form__container">
-                        <input type="text" name="user_name" placeholder="Имя" class="form__text form__text_edit_name" required minlength="2" maxlength="40">
-                        <span class="form__input-error" id="user_name-error"></span>
-                        <input type="text" name="activity" placeholder="Вид деятельности" class="form__text form__text_edit_about-me" required minlength="2" maxlength="200">
-                        <span class="form__input-error" id="activity-error"></span>
+                        <input id="user_name" class="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
+                        <span class="form__input-error user_name-error"></span>
+                        <input id="activity" class="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200">
+                        <span class="form__input-error activity-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
@@ -49,10 +49,10 @@
                 <h2 class="popup__title">Новое место</h2>
                 <form name="card_form" class="form" novalidate>
                     <fieldset class="form__container">
-                        <input type="text" name="image_name" placeholder="Название" class="form__text form__text_edit_name">
-                        <span class="form__input-error" id="image_name-error"></span>
-                        <input type="url" name="url_image" placeholder="Ссылка на картинку" class="form__text form__text_edit_about-me">
-                        <span class="form__input-error" id="url_image-error"></span>
+                        <input id="image_name" class="form__text form__text_edit_name" type="text" placeholder="Название" required required minlength="2" maxlength="30">
+                        <span class="form__input-error image_name-error"></span>
+                        <input id="url_image" class="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required>
+                        <span class="form__input-error url_image-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
