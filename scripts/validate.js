@@ -1,32 +1,29 @@
-const formElement = document.querySelector('.form');
-const formInput = formElement.querySelector('.form__text');
-//выбираем элемент ошибки на основе уникального класса
-const formError = formElement.querySelector(`.${formInput.id}-error`);
-
 // функция, которая добавляет класс с ошибкой 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+    const {inputErrorClass, errorClass} = config;
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('form__input_type_error');
+    inputElement.classList.add(inputErrorClass);
     // показываем сообщение об ошибке
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('form__input-error_active');
+    errorElement.classList.add(errorClass);
 };
 
 // функция, которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, config) => {
+    const {inputErrorClass, errorClass} = config;
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('form__input_type_error');
+    inputElement.classList.remove(inputErrorClass);
     // скрываем сообщение об ошибке
-    errorElement.classList.remove('form__input-error_active');
+    errorElement.classList.remove(errorClass);
     errorElement.textContent = '';
 };
 
 // функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
+const isValid = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
+        showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(formElement, inputElement, config);
     }
 };
 
@@ -47,10 +44,11 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 // функция, которая находит, перебирает и добоаляет каждому полю событие input
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, config) => {
+    const {inputSelector, submitButtonSelector, ...restConfig} = config;
     // находим все поля внутри формы
-    const inputList = Array.from(formElement.querySelectorAll('.form__text'));
-    const buttonElement = formElement.querySelector('.form__button');
+    const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+    const buttonElement = formElement.querySelector(submitButtonSelector);
 
     toggleButtonState(inputList, buttonElement);
 
@@ -58,7 +56,7 @@ const setEventListeners = (formElement) => {
         // каждому полю добавим обработчик событий input
         inputElement.addEventListener('input', () => {
             // вызовем isValid, передав ей форму и проверяемый элемент
-            isValid(formElement, inputElement);
+            isValid(formElement, inputElement, restConfig);
 
             // вызовем toggleButtonState и передадим ей массив полей и кнопку
             toggleButtonState(inputList, buttonElement);
@@ -67,14 +65,21 @@ const setEventListeners = (formElement) => {
 };
 
 // функция, которая находит и переберает все формы на странице
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.form'));
+const enableValidation = (config) => {
+    const {formSelector, ...restConfig} = config;
+    const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        setEventListeners(formElement);
+        setEventListeners(formElement, restConfig);
     });    
 };
 
-enableValidation();
+enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__text',
+    submitButtonSelector: '.form__button',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active'
+});
