@@ -17,13 +17,25 @@ closeEditProfileButton.addEventListener('click', function() {
   togglePopup(popupEditProfile);
 });
 
+// функция закрытия попапа кликом на оверлей
 function handleOverlayClick(event) {
   const openPopup = document.querySelector('.popup_is-opened');
   if (event.target === event.currentTarget) {    
     togglePopup(openPopup);
   }
 }
+
 popupEditProfile.addEventListener('click', handleOverlayClick);
+
+// функция закрытия попапа нажатием на Esc
+function cloceEsc(evt) {
+  const openPopup = document.querySelector('.popup_is-opened');
+  if (evt.key === 'Escape') {
+    togglePopup(openPopup);
+  }
+}
+
+document.addEventListener('keydown', cloceEsc);
 
 // изменения профиля
 const nameAvatar = document.querySelector('.profile-info__title');
