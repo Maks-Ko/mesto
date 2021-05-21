@@ -35,9 +35,9 @@
                 <form name="my_form" class="form" novalidate>
                     <fieldset class="form__container">
                         <input id="user_name" class="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
-                        <span class="form__input-error user_name-error"></span>
+                        <span id="user_name-error" class="form__input-error"></span>
                         <input id="activity" class="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200">
-                        <span class="form__input-error activity-error"></span>
+                        <span id="activity-error" class="form__input-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
@@ -50,9 +50,9 @@
                 <form name="card_form" class="form" novalidate>
                     <fieldset class="form__container">
                         <input id="image_name" class="form__text form__text_edit_name" type="text" placeholder="Название" required minlength="2" maxlength="30">
-                        <span class="form__input-error image_name-error"></span>
+                        <span id="image_name-error" class="form__input-error"></span>
                         <input id="url_image" class="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required>
-                        <span class="form__input-error url_image-error"></span>
+                        <span id="url_image-error" class="form__input-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
                 </form>
@@ -61,7 +61,7 @@
         <div class="popup popup_type_image">
             <div class="images-content">
                 <button type="button" class="images-content__button"></button>
-                <img class="images-content__foto">
+                <img class="images-content__foto" src="" alt="">
                 <h2 class="images-content__title"></h2>                
             </div>
         </div>

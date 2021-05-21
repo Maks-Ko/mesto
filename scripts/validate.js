@@ -1,7 +1,7 @@
 // функция, которая добавляет класс с ошибкой 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
     const {inputErrorClass, errorClass} = config;
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     // показываем сообщение об ошибке
     errorElement.textContent = errorMessage;
@@ -11,7 +11,7 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
 // функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement, config) => {
     const {inputErrorClass, errorClass} = config;
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(inputErrorClass);
     // скрываем сообщение об ошибке
     errorElement.classList.remove(errorClass);
