@@ -18,6 +18,12 @@
     cursor: url(../../../images/Layer.png), pointer;
 }
 
+.form__button:disabled {
+    background-color: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    color: #C4C4C4;
+}
+
 @media (max-width: 730px) {
     .form__button {
         height: 46px;

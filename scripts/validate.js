@@ -30,15 +30,38 @@ const isValid = (formElement, inputElement) => {
     }
 };
 
+// функция, которая проверяет наличие невалидного поля
+const hazInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+    });
+};
+
+// функция переключения кнопки: активная, неактивная
+const toggleButtonState = (inputList, buttonElement) => {
+    if (hazInvalidInput(inputList)) {
+        buttonElement.disabled = true;
+    } else {
+        buttonElement.disabled = false;
+    }
+}
+
 // функция, которая находит, перебирает и добоаляет каждому полю событие input
 const setEventListeners = (formElement) => {
     // находим все поля внутри формы
     const inputList = Array.from(formElement.querySelectorAll('.form__text'));
+    const buttonElement = formElement.querySelector('.form__button');
+
+    toggleButtonState(inputList, buttonElement);
+
     inputList.forEach((inputElement) => {
         // каждому полю добавим обработчик событий input
         inputElement.addEventListener('input', () => {
             // вызовем isValid, передав ей форму и проверяемый элемент
             isValid(formElement, inputElement);
+
+            // вызовем toggleButtonState и передадим ей массив полей и кнопку
+            toggleButtonState(inputList, buttonElement);
         });
     });
 };
@@ -50,7 +73,6 @@ const enableValidation = () => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-
         setEventListeners(formElement);
     });    
 };
