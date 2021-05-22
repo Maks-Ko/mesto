@@ -2,40 +2,52 @@
 const openEditProfileButton = document.querySelector('.profile-info__button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const closeEditProfileButton = document.querySelector('.popup__button');
-
+/*
 function togglePopup(popup) {
     popup.classList.toggle('popup_is-opened');
 }
+*/
+// функция открытия попапа
+function openPopup(popup) {
+  popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', cloceEsc);
+}
 
-openEditProfileButton.addEventListener('click', function() {
-  nameInput.value = nameAvatar.textContent;
-  aboutMeInput.value = aboutMeAvatar.textContent;
-  togglePopup(popupEditProfile);
-});
-
-closeEditProfileButton.addEventListener('click', function() {
-  togglePopup(popupEditProfile);
-});
+// функция закрытия попапа
+function closePopup(popup) {
+  popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', cloceEsc);
+}
 
 // функция закрытия попапа кликом на оверлей
 function handleOverlayClick(event) {
   const openPopup = document.querySelector('.popup_is-opened');
   if (event.target === event.currentTarget) {    
-    togglePopup(openPopup);
+    closePopup(openPopup);
   }
 }
-
-popupEditProfile.addEventListener('click', handleOverlayClick);
 
 // функция закрытия попапа нажатием на Esc
 function cloceEsc(evt) {
   const openPopup = document.querySelector('.popup_is-opened');
-  if (evt.key === 'Escape') {
-    togglePopup(openPopup);
+  if (evt.key === keyEscape) {
+    closePopup(openPopup);
   }
 }
 
-document.addEventListener('keydown', cloceEsc);
+openEditProfileButton.addEventListener('click', function() {
+  nameInput.value = nameAvatar.textContent;
+  aboutMeInput.value = aboutMeAvatar.textContent;
+  openPopup(popupEditProfile);
+});
+
+closeEditProfileButton.addEventListener('click', function() {
+  closePopup(popupEditProfile);
+});
+
+popupEditProfile.addEventListener('click', handleOverlayClick);
+
+//document.addEventListener('keydown', cloceEsc);
 
 // изменения профиля
 const nameAvatar = document.querySelector('.profile-info__title');
@@ -54,8 +66,9 @@ function formEditProfileSubmitHandler (event) {
   nameAvatar.textContent = userName;
   aboutMeAvatar.textContent = userProfession;
   
-  togglePopup(popupEditProfile);
+  closePopup(popupEditProfile);
 }
+
 formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 // popup карточек  
@@ -72,11 +85,11 @@ const cardTemplate = document.querySelector('#element-template');
 openPopupAddCard.addEventListener('click', function() {
   inputCardName.value = '';
   inputCardPhto.value = '';
-  togglePopup(popupAddCard);
+  openPopup(popupAddCard);
 });
 
 closePopupAddCard.addEventListener('click', function() {
-  togglePopup(popupAddCard);
+  closePopup(popupAddCard);
 });
 
 popupAddCard.addEventListener('click', handleOverlayClick);
@@ -104,7 +117,7 @@ function createCard (cardData) {
     popupImageContent.src = openPopupImage.src;
     popupImageContent.alt = openPopupImage.alt;
     popupImageTitle.textContent = openPopupImage.alt;
-    togglePopup(popupImage);
+    openPopup(popupImage);
   });
 
   return newCard;
@@ -126,11 +139,16 @@ function formAddCardSubmitHandler (event) {
   cardElementFoto.link = inputCardPhto.value;
   inputCardName.value = '';
   inputCardPhto.value = '';
+  
+  // делает кнопку сабминта неактивной
+  const inputList = Array.from(document.forms.card_form);
+  const buttonElement = inputList.pop();
+  toggleButtonState(inputList, buttonElement);
 
   const newCardForm = createCard(cardElementFoto);
 
   cardContainer.prepend(newCardForm);
-  togglePopup(popupAddCard);
+  closePopup(popupAddCard);
 }
 formAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
@@ -141,6 +159,6 @@ const popupImageContent = popupImage.querySelector('.images-content__foto');
 const popupImageTitle = popupImage.querySelector('.images-content__title');
 
 closePopupImage.addEventListener('click', function() {
-  togglePopup(popupImage);
+  closePopup(popupImage);
 });
 popupImage.addEventListener('click', handleOverlayClick);
