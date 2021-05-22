@@ -14,7 +14,7 @@
 
 .images-content__button:hover {
     opacity: .6;
-    cursor: url(../../../images/Layer.png), pointer;
+    cursor: pointer;
 }
 
 @media (max-width: 730px) {

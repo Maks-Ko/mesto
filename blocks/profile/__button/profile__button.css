@@ -13,7 +13,7 @@
 .profile__button:hover {
     opacity: .6;
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 100%), url(../../../images/Vector_x.png);
-    cursor: url(../../../images/Layer.png), pointer;
+    cursor: pointer;
 }
 
 @media (max-width: 730px) {

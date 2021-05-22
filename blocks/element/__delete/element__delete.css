@@ -9,9 +9,13 @@
     top: 18px;
     left: 249px;
     transition: opacity 1s ease-in-out;
+    /*position: relative;*/
+    z-index: 2;
 }
 
 .element__delete:hover {
+    /*position: relative;
+    z-index: 3;*/
     opacity: .6;
-    cursor: url(../../../images/Layer.png), pointer;
+    cursor: pointer;
 }

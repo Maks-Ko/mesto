@@ -4,4 +4,14 @@
     width: 100%;
     height: 282px;
     border-radius: 10px 10px 0 0;
+    transition: opacity 1s ease-in-out;
+    /*position: relative;
+    z-index: 1;*/
+}
+
+.element__foto:hover {
+    position: relative;
+    z-index: 1;
+    opacity: .8;
+    cursor: pointer;
 }
