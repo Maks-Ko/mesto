@@ -14,5 +14,5 @@
 
 .element__like:hover {
     opacity: .5;
-    cursor: url(../../../images/Layer.png), pointer;
+    cursor: pointer;
 }
