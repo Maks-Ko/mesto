@@ -1,12 +1,10 @@
+import { Card } from './Card.js';
+
 //popup изменения профиля
 const openEditProfileButton = document.querySelector('.profile-info__button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const closeEditProfileButton = document.querySelector('.popup__button');
-/*
-function togglePopup(popup) {
-    popup.classList.toggle('popup_is-opened');
-}
-*/
+
 // функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_is-opened');
@@ -94,7 +92,8 @@ closePopupAddCard.addEventListener('click', function() {
 
 popupAddCard.addEventListener('click', handleOverlayClick);
 
-// создание новой карточки
+// создание новой карточки перенёс в class Card
+/*
 function createCard (cardData) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   const likeButton = newCard.querySelector('.element__like');
@@ -122,12 +121,22 @@ function createCard (cardData) {
 
   return newCard;
 }
+*/
 
+// добавление карточки через initial-cards.js
+initialCards.forEach(function(cardData) {
+  const cards = new Card(cardData);
+  const cardElement = cards.generateCard ();
+  cardContainer.append(cardElement);
+});
+
+/*
 // добавление карточки через initial-cards.js
 initialCards.forEach(function(cardData) {
   const cards = createCard(cardData);
   cardContainer.append(cards);
 });
+*/
 
 // добавление карточки через форму
 function formAddCardSubmitHandler (event) {
@@ -145,11 +154,15 @@ function formAddCardSubmitHandler (event) {
   const buttonElement = inputList.pop();
   toggleButtonState(inputList, buttonElement);
 
-  const newCardForm = createCard(cardElementFoto);
+  /*const newCardForm = createCard(cardElementFoto);*/
 
-  cardContainer.prepend(newCardForm);
+  const cards = new Card(cardElementFoto);
+  const cardElement = cards.generateCard ();
+
+  cardContainer.prepend(cardElement);
   closePopup(popupAddCard);
 }
+
 formAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
 //popup картинок
@@ -161,4 +174,7 @@ const popupImageTitle = popupImage.querySelector('.images-content__title');
 closePopupImage.addEventListener('click', function() {
   closePopup(popupImage);
 });
+
 popupImage.addEventListener('click', handleOverlayClick);
+
+export { openPopup, popupImage, popupImageContent, popupImageTitle };
