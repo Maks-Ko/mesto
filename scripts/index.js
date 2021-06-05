@@ -1,4 +1,7 @@
 import { Card } from './Card.js';
+import { initialCards, keyEscape } from './initial-сards.js';
+import { FormValidator } from './FormValidator.js';
+export { openPopup, popupImage, popupImageContent, popupImageTitle };
 
 //popup изменения профиля
 const openEditProfileButton = document.querySelector('.profile-info__button');
@@ -78,7 +81,7 @@ const formAddCard = popupAddCard.querySelector('.form');
 const inputCardName = popupAddCard.querySelector('.form__text_edit_name');
 const inputCardPhto = popupAddCard.querySelector('.form__text_edit_about-me');
 const cardContainer = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#element-template');
+//const cardTemplate = document.querySelector('#element-template');
 
 openPopupAddCard.addEventListener('click', function() {
   inputCardName.value = '';
@@ -152,7 +155,8 @@ function formAddCardSubmitHandler (event) {
   // делает кнопку сабминта неактивной
   const inputList = Array.from(document.forms.card_form);
   const buttonElement = inputList.pop();
-  toggleButtonState(inputList, buttonElement);
+  const form = new FormValidator(inputList);
+  form.toggleButtonState(inputList, buttonElement);
 
   /*const newCardForm = createCard(cardElementFoto);*/
 
@@ -176,5 +180,3 @@ closePopupImage.addEventListener('click', function() {
 });
 
 popupImage.addEventListener('click', handleOverlayClick);
-
-export { openPopup, popupImage, popupImageContent, popupImageTitle };

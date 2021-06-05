@@ -73,7 +73,7 @@ const enableValidation = (config) => {
             evt.preventDefault();
         });
         setEventListeners(formElement, restConfig);
-    });    
+    });
 };
 
 enableValidation({

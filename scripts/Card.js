@@ -1,4 +1,5 @@
 import { openPopup, popupImage, popupImageContent, popupImageTitle } from './index.js';
+export { Card };
 
 class Card {
   constructor (cardData, cardSelector) {
@@ -54,5 +55,3 @@ class Card {
     });
   }
 }
-
-export { Card };
