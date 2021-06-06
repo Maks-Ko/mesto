@@ -6,45 +6,37 @@ class FormValidator {
         this._inputSelector = config.inputSelector;
         this._submitButtonSelector = config.submitButtonSelector;
         this._inputErrorClass = config.inputErrorClass;
-        this._errorClass = config.errorClass;
+        this._errorClass = config.errorClass;        
         this._form = formSelector;
+        this._formElement = document.querySelector(this._form);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     }
 
     // метод устанавливает обработчик на форму
     enableValidation() {        
-        const formElement = document.querySelector(this._form);
-        formElement.addEventListener('submit', (evt) => {
+        //const formElement = document.querySelector(this._form);
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        this._setEventListeners(formElement);
-        
-
-        /*
-        const formList = Array.from(document.querySelectorAll(this._form));
-        formList.forEach((formElement) => {
-            formElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            });
-            this._setEventListeners(formElement);
-        });
-        */
+        this._setEventListeners(this._formElement);
     }
 
     // метод, который находит, перебирает и добоаляет каждому полю событие input
     _setEventListeners(formElement) {
-        const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-        const buttonElement = formElement.querySelector(this._submitButtonSelector);
+        //const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
+        //const buttonElement = formElement.querySelector(this._submitButtonSelector);
 
-        this.toggleButtonState(inputList, buttonElement);
+        this.toggleButtonState(this._inputList, this._buttonElement);
 
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             // каждому полю добавим обработчик событий input
             inputElement.addEventListener('input', () => {
                 // вызовем isValid, передав ей форму и проверяемый элемент
                 this._isValid(formElement, inputElement);
 
                 // вызовем toggleButtonState и передадим ей массив полей и кнопку
-                this.toggleButtonState(inputList, buttonElement);
+                this.toggleButtonState(this._inputList, this._buttonElement);
             });
         });
     }
