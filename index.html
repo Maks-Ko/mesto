@@ -34,9 +34,9 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="profileForm" class="form form_profile" id="profileFormValidator" novalidate>
                     <fieldset class="form__container">
-                        <input id="user_name" class="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
+                        <input name="user_name" id="user_name" class="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
                         <span id="user_name-error" class="form__input-error"></span>
-                        <input id="activity" class="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200">
+                        <input name="activity" id="activity" class="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200">
                         <span id="activity-error" class="form__input-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
@@ -49,9 +49,9 @@
                 <h2 class="popup__title">Новое место</h2>
                 <form name="card_form" class="form" id="cardFormValidator" novalidate>
                     <fieldset class="form__container">
-                        <input id="image_name" class="form__text form__text_edit_name" type="text" placeholder="Название" required minlength="2" maxlength="30">
+                        <input name="image_name" id="image_name" class="form__text form__text_edit_name" type="text" placeholder="Название" required minlength="2" maxlength="30">
                         <span id="image_name-error" class="form__input-error"></span>
-                        <input id="url_image" class="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required>
+                        <input name="url_image" id="url_image" class="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required>
                         <span id="url_image-error" class="form__input-error"></span>
                         <button type="submit" class="form__button">Сохранить</button>
                     </fieldset>
@@ -75,7 +75,6 @@
                 </div>
             </li>
         </template>
-        <!--<script src="./scripts/validate.js"></script>-->
         <script type="module" src="./scripts/index.js"></script>
     </body>
 </html>

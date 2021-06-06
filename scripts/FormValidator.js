@@ -1,4 +1,3 @@
-//import { config, formSelector } from './initial-сards.js';
 export { FormValidator };
 
 class FormValidator {
@@ -6,7 +5,7 @@ class FormValidator {
         this._inputSelector = config.inputSelector;
         this._submitButtonSelector = config.submitButtonSelector;
         this._inputErrorClass = config.inputErrorClass;
-        this._errorClass = config.errorClass;        
+        this._errorClass = config.errorClass;
         this._form = formSelector;
         this._formElement = document.querySelector(this._form);
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
@@ -14,8 +13,7 @@ class FormValidator {
     }
 
     // метод устанавливает обработчик на форму
-    enableValidation() {        
-        //const formElement = document.querySelector(this._form);
+    enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
@@ -24,9 +22,6 @@ class FormValidator {
 
     // метод, который находит, перебирает и добоаляет каждому полю событие input
     _setEventListeners(formElement) {
-        //const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-        //const buttonElement = formElement.querySelector(this._submitButtonSelector);
-
         this.toggleButtonState(this._inputList, this._buttonElement);
 
         this._inputList.forEach((inputElement) => {

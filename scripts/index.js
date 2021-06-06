@@ -54,8 +54,6 @@ closeEditProfileButton.addEventListener('click', function() {
 
 popupEditProfile.addEventListener('click', handleOverlayClick);
 
-//document.addEventListener('keydown', cloceEsc);
-
 // изменения профиля
 const nameAvatar = document.querySelector('.profile-info__title');
 const aboutMeAvatar = document.querySelector('.profile-info__text');
@@ -87,7 +85,6 @@ const formAddCard = popupAddCard.querySelector('.form');
 const inputCardName = popupAddCard.querySelector('.form__text_edit_name');
 const inputCardPhto = popupAddCard.querySelector('.form__text_edit_about-me');
 const cardContainer = document.querySelector('.elements');
-//const cardTemplate = document.querySelector('#element-template');
 
 openPopupAddCard.addEventListener('click', function() {
   formAddCard.reset();
@@ -123,9 +120,6 @@ function handleFormAddCardSubmit (event) {
   const buttonElement = inputList.pop();
   cardFormValidator.toggleButtonState(inputList, buttonElement);
   
-
-  /*const newCardForm = createCard(cardElementFoto);*/
-
   const cards = new Card(cardElementFoto);
   const cardElement = cards.generateCard ();
 
