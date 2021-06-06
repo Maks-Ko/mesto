@@ -1,7 +1,13 @@
 import { Card } from './Card.js';
-import { initialCards, keyEscape } from './initial-сards.js';
+import { initialCards, keyEscape, config, profileForm, cardForm } from './initial-сards.js';
 import { FormValidator } from './FormValidator.js';
 export { openPopup, popupImage, popupImageContent, popupImageTitle };
+
+const profileFormValidator = new FormValidator(config, profileForm);
+profileFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(config, cardForm);
+cardFormValidator.enableValidation();
 
 //popup изменения профиля
 const openEditProfileButton = document.querySelector('.profile-info__button');

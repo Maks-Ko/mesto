@@ -27,12 +27,15 @@ const initialCards = [
 
 const keyEscape = 'Escape';
 
+const profileForm = '#profileFormValidator';
+const cardForm = '#cardFormValidator';
+
 const config = {
-  formSelector: '.form',
+  //formSelector: '.form',
   inputSelector: '.form__text',
   submitButtonSelector: '.form__button',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 };
 
-export { initialCards, keyEscape, config };
+export { initialCards, keyEscape, config, profileForm, cardForm };

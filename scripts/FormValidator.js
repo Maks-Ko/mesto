@@ -1,24 +1,33 @@
-import { config } from './initial-сards.js';
+//import { config, formSelector } from './initial-сards.js';
 export { FormValidator };
 
 class FormValidator {
-    constructor (config) {
-        this._formSelector = config.formSelector;
+    constructor (config, formSelector) {
         this._inputSelector = config.inputSelector;
         this._submitButtonSelector = config.submitButtonSelector;
         this._inputErrorClass = config.inputErrorClass;
         this._errorClass = config.errorClass;
+        this._form = formSelector;
     }
 
-    // метод который находит все формы на странице
-    enableValidation() {
-        const formList = Array.from(document.querySelectorAll(this._formSelector));
+    // метод устанавливает обработчик на форму
+    enableValidation() {        
+        const formElement = document.querySelector(this._form);
+        formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
+        this._setEventListeners(formElement);
+        
+
+        /*
+        const formList = Array.from(document.querySelectorAll(this._form));
         formList.forEach((formElement) => {
             formElement.addEventListener('submit', (evt) => {
                 evt.preventDefault();
             });
             this._setEventListeners(formElement);
-        });  
+        });
+        */
     }
 
     // метод, который находит, перебирает и добоаляет каждому полю событие input
@@ -83,7 +92,3 @@ class FormValidator {
         errorElement.classList.add(this._errorClass);
     }
 }
-
-const form = new FormValidator(config);
-
-form.enableValidation();
