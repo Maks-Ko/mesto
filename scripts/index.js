@@ -116,9 +116,7 @@ function handleFormAddCardSubmit (event) {
   inputCardPhto.value = '';
   
   // делает кнопку сабминта неактивной
-  const inputList = Array.from(document.forms.card_form);
-  const buttonElement = inputList.pop();
-  cardFormValidator.toggleButtonState(inputList, buttonElement);
+  cardFormValidator.toggleButtonState();
   
   const cards = new Card(cardElementFoto);
   const cardElement = cards.generateCard ();
