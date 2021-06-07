@@ -38,4 +38,6 @@ const config = {
   errorClass: 'form__input-error_active'
 };
 
-export { initialCards, keyEscape, config, profileForm, cardForm };
+const cardSelector = '#element-template';
+
+export { initialCards, keyEscape, config, cardSelector, profileForm, cardForm };

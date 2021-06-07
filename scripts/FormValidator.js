@@ -22,7 +22,7 @@ class FormValidator {
 
     // метод, который находит, перебирает и добоаляет каждому полю событие input
     _setEventListeners() {
-        this.toggleButtonState(); //this._inputList, this._buttonElement
+        this.toggleButtonState();
 
         this._inputList.forEach((inputElement) => {
             // каждому полю добавим обработчик событий input
@@ -31,7 +31,7 @@ class FormValidator {
                 this._isValid(inputElement);
 
                 // вызовем toggleButtonState и передадим ей массив полей и кнопку
-                this.toggleButtonState(); //this._inputList, this._buttonElement
+                this.toggleButtonState();
             });
         });
     }

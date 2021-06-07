@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-import { initialCards, keyEscape, config, profileForm, cardForm } from './initial-сards.js';
+import { initialCards, keyEscape, config, cardSelector, profileForm, cardForm } from './initial-сards.js';
 import { FormValidator } from './FormValidator.js';
 export { openPopup, popupImage, popupImageContent, popupImageTitle };
 
@@ -99,7 +99,7 @@ popupAddCard.addEventListener('click', handleOverlayClick);
 
 // добавление карточки через initial-cards.js
 initialCards.forEach(function(cardData) {
-  const cards = new Card(cardData);
+  const cards = new Card(cardData, cardSelector);
   const cardElement = cards.generateCard ();
   cardContainer.append(cardElement);
 });
@@ -118,7 +118,7 @@ function handleFormAddCardSubmit (event) {
   // делает кнопку сабминта неактивной
   cardFormValidator.toggleButtonState();
   
-  const cards = new Card(cardElementFoto);
+  const cards = new Card(cardElementFoto, cardSelector);
   const cardElement = cards.generateCard ();
 
   cardContainer.prepend(cardElement);

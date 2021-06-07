@@ -10,7 +10,7 @@ class Card {
 
   // клонируем разметку карточки из HTML
   _getTemplate () {
-    const cardSelector = document.querySelector('#element-template').content.querySelector('.element').cloneNode(true);
+    const cardSelector = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
     // возращаем DOM-элемент карточки
     return cardSelector;
   }
