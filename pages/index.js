@@ -156,7 +156,6 @@ formAddCard.addEventListener('submit', handleFormAddCardSubmit);
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
 export const handleOpenImage = (name, link) => {
   popupOpenImage.open(name, link);
-  console.log("foto");
 }
 
 // // закрытие попапа кртинки по слушателям
