@@ -1,4 +1,7 @@
 export { initialCards, keyEscape, config, cardSelector, profileForm, cardForm };
+export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, formEditProfile, nameInput, aboutMeInput};
+export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer};
+export {popupImage, closePopupImage, popupImageContent, popupImageTitle};
 
 const initialCards = [
     {
@@ -41,3 +44,31 @@ const config = {
 };
 
 const cardSelector = '#element-template';
+
+//popup изменения профиля
+const openEditProfileButton = document.querySelector('.profile-info__button');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const closeEditProfileButton = document.querySelector('.popup__button_profile');
+
+// изменения профиля
+const nameAvatar = document.querySelector('.profile-info__title');
+const aboutMeAvatar = document.querySelector('.profile-info__text');
+const formEditProfile = document.querySelector('.form_profile');
+const nameInput = formEditProfile.querySelector('.form__text_edit_name');
+const aboutMeInput = formEditProfile.querySelector('.form__text_edit_about-me');
+
+// popup карточек  
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const openPopupAddCard = document.querySelector('.profile__button');
+const closePopupAddCard = document.querySelector('.popup__button_card')
+
+const formAddCard = popupAddCard.querySelector('.form');
+const inputCardName = popupAddCard.querySelector('.form__text_edit_name');
+const inputCardPhto = popupAddCard.querySelector('.form__text_edit_about-me');
+const cardContainer = document.querySelector('.elements');
+
+//popup картинок
+const popupImage = document.querySelector('.popup_type_image');
+const closePopupImage = popupImage.querySelector('.images-content__button');
+const popupImageContent = popupImage.querySelector('.images-content__foto');
+const popupImageTitle = popupImage.querySelector('.images-content__title');
