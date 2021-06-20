@@ -1,6 +1,6 @@
-import { Card } from './Card.js';
-import { initialCards, keyEscape, config, cardSelector, profileForm, cardForm } from './initial-сards.js';
-import { FormValidator } from './FormValidator.js';
+import { Card } from '../components/Card.js';
+import { initialCards, keyEscape, config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
+import { FormValidator } from '../components/FormValidator.js';
 export { openPopup, popupImage, popupImageContent, popupImageTitle };
 
 const profileFormValidator = new FormValidator(config, profileForm);

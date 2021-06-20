@@ -1,3 +1,5 @@
+export { initialCards, keyEscape, config, cardSelector, profileForm, cardForm };
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -39,5 +41,3 @@ const config = {
 };
 
 const cardSelector = '#element-template';
-
-export { initialCards, keyEscape, config, cardSelector, profileForm, cardForm };
