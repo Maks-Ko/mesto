@@ -105,12 +105,15 @@ popupAddCard.addEventListener('click', handleOverlayClick);
 //   cardContainer.append(cardElement);
 // });
 
-// function rendererCsrds(cardData) {
-//   const cards = new Card(cardData, cardSelector).generateCard();
-//   //const cardElement = cards.generateCard();
-// }
 
-const addCards = new Section({ items: initialCards }, '.elements');
+// добавление карточек из массива данных 
+const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
+
+function rendererCsrds(cardData) {
+  const cards = new Card(cardData, cardSelector).generateCard();
+  addCards.addItem(cards);
+}
+
 addCards.renderItems();
 
 // добавление карточки через форму
