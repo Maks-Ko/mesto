@@ -1,6 +1,7 @@
-import { Card } from '../components/Card.js';
+import Card from '../components/Card.js';
 import { initialCards, keyEscape, config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 export { openPopup, popupImage, popupImageContent, popupImageTitle };
 
 const profileFormValidator = new FormValidator(config, profileForm);
@@ -98,11 +99,19 @@ closePopupAddCard.addEventListener('click', function() {
 popupAddCard.addEventListener('click', handleOverlayClick);
 
 // добавление карточки через initial-cards.js
-initialCards.forEach(function(cardData) {
-  const cards = new Card(cardData, cardSelector);
-  const cardElement = cards.generateCard ();
-  cardContainer.append(cardElement);
-});
+// initialCards.forEach(function(cardData) {
+//   const cards = new Card(cardData, cardSelector);
+//   const cardElement = cards.generateCard ();
+//   cardContainer.append(cardElement);
+// });
+
+// function rendererCsrds(cardData) {
+//   const cards = new Card(cardData, cardSelector).generateCard();
+//   //const cardElement = cards.generateCard();
+// }
+
+const addCards = new Section({ items: initialCards }, '.elements');
+addCards.renderItems();
 
 // добавление карточки через форму
 function handleFormAddCardSubmit (event) {
