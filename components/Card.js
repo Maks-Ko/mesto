@@ -1,11 +1,10 @@
-import { openPopup } from '../pages/index.js';
-import {popupImage, popupImageContent, popupImageTitle} from '../utils/constants.js';
+import { handleOpenImage } from '../pages/index.js';
 
 export default class Card {
-  constructor (cardData, cardSelector) {
+  constructor (cardData, cardSelector,) {
       this._name = cardData.name;
       this._link = cardData.link;
-      this._cardSelector = cardSelector;
+      this._cardSelector = cardSelector;      
   }
 
   // клонируем разметку карточки из HTML
@@ -46,12 +45,19 @@ export default class Card {
   }
   
   // открытие попапа картинки
+  // _openPopupImage () {
+  //   this._element.querySelector('.element__foto').addEventListener('click', () => {
+  //     popupImageContent.src = this._link;
+  //     popupImageContent.alt = this._name;
+  //     popupImageTitle.textContent = this._name;
+  //     openPopup(popupImage);
+  //   });
+  // }
+
+  // открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
-      popupImageContent.src = this._link;
-      popupImageContent.alt = this._name;
-      popupImageTitle.textContent = this._name;
-      openPopup(popupImage);
+      handleOpenImage(this._name, this._link);
     });
   }
 }
