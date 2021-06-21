@@ -1,4 +1,4 @@
-import { handleOpenImage } from '../pages/index.js';
+import { handleCardClick } from '../pages/index.js';
 
 export default class Card {
   constructor (cardData, cardSelector,) {
@@ -47,7 +47,7 @@ export default class Card {
   // открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
-      handleOpenImage(this._name, this._link);
+      handleCardClick(this._name, this._link);
     });
   }
 }

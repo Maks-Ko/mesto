@@ -85,7 +85,7 @@ formCard.setEventListeners();
 
 // открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
-export const handleOpenImage = (name, link) => {
+export const handleCardClick = (name, link) => {
   popupOpenImage.open(name, link);
 }
 
