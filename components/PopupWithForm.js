@@ -6,11 +6,6 @@ export default class PopupWithForm extends Popup {
         this._handleFormSubmit = handleFormSubmit;
     }
 
-    close() {
-        this._popupSelector.classList.remove('popup_is-opened');
-        document.removeEventListener('keydown', this._handleEscClose.bind(this));
-    }
-
     _getInputValues() {
         // вытаскиваем содержимое инпутов
         this._inputName = this._formCard.querySelector('.form__text_edit_name');
@@ -20,12 +15,11 @@ export default class PopupWithForm extends Popup {
         this._formValues = {};
         this._formValues.name = this._inputName.value;
         this._formValues.link = this._inputLink.value;
-
+        
         return this._formValues;
     }
 
-    setEventListeners() {
-        //document.addEventListener('click', this._handleOverlayClick.bind(this));
+    setEventListeners() {        
         this._closeButtom = this._popupSelector.querySelector('.popup__button_close');
         this._closeButtom.addEventListener('click', this.close.bind(this));
         
@@ -34,8 +28,6 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
 
             this._handleFormSubmit(this._getInputValues());
-
-            //this._formCard.reset();
             this.close();
         });
     }

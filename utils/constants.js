@@ -1,6 +1,6 @@
 export { initialCards, keyEscape, config, cardSelector, profileForm, cardForm };
 export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, formEditProfile, nameInput, aboutMeInput};
-export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer};
+export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo};
 export {popupImage, closePopupImage, popupImageContent, popupImageTitle};
 
 const initialCards = [
@@ -56,6 +56,9 @@ const aboutMeAvatar = document.querySelector('.profile-info__text');
 const formEditProfile = document.querySelector('.form_profile');
 const nameInput = formEditProfile.querySelector('.form__text_edit_name');
 const aboutMeInput = formEditProfile.querySelector('.form__text_edit_about-me');
+const dataUserInfo = {};
+dataUserInfo.name = nameAvatar;
+dataUserInfo.profession = aboutMeAvatar;
 
 // popup карточек  
 const popupAddCard = document.querySelector('.popup_type_add-card');

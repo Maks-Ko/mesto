@@ -45,16 +45,6 @@ export default class Card {
   }
   
   // открытие попапа картинки
-  // _openPopupImage () {
-  //   this._element.querySelector('.element__foto').addEventListener('click', () => {
-  //     popupImageContent.src = this._link;
-  //     popupImageContent.alt = this._name;
-  //     popupImageTitle.textContent = this._name;
-  //     openPopup(popupImage);
-  //   });
-  // }
-
-  // открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
       handleOpenImage(this._name, this._link);
