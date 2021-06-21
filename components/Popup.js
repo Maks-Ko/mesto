@@ -6,12 +6,13 @@ export default class Popup {
     }
     
     open() {
-        this._popupSelector.classList.add('popup_is-opened');        
+        this._popupSelector.classList.add('popup_is-opened');
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     close() {
         this._popupSelector.classList.remove('popup_is-opened');
-        document.removeEventListener('keydown', this._handleEscClose.bind(this));        
+        document.removeEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     // метод закрытия попапа нажатием на Esc
@@ -29,9 +30,9 @@ export default class Popup {
     // }
 
     // метод добавления слушателей
-    setEventListeners() {
-        document.addEventListener('keydown', this._handleEscClose.bind(this));        
+    setEventListeners() {        
         //document.addEventListener('click', this._handleOverlayClick.bind(this));
+        // закрытие попапа по крестику
         const closeButtom = this._popupSelector.querySelector('.popup__button_close');
         closeButtom.addEventListener('click', this.close.bind(this));
     }

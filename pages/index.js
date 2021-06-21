@@ -8,6 +8,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 //export { openPopup };
 
@@ -61,8 +62,9 @@ openEditProfileButton.addEventListener('click', function() {
 //   popupFormProfil.close();
 // });
 
-// закрытие попапа редактирование профеля по слушателям
-popupFormProfil.setEventListeners();
+// закрытие попапа редактирование профеля
+popupFormProfil.close();
+//popupFormProfil.setEventListeners();
 //popupEditProfile.addEventListener('click', handleOverlayClick);
 
 
@@ -106,8 +108,8 @@ openPopupAddCard.addEventListener('click', function() {
 //   popupFormCard.close();
 // });
 
-// закрытие попапа добаления карточки по слушателям
-popupFormCard.setEventListeners();
+// закрытие попапа добаления карточки
+popupFormCard.close();
 //popupAddCard.addEventListener('click', handleOverlayClick);
 
 // добавление карточки через initial-cards.js
@@ -128,29 +130,46 @@ function rendererCsrds(cardData) {
 
 addCards.renderItems();
 
-// добавление карточки через форму
-function handleFormAddCardSubmit (event) {
-  event.preventDefault();
+// // добавление карточки через форму
+// function handleFormAddCardSubmit (event) {
+//   event.preventDefault();
 
-  const cardElementFoto = {};
+//   const cardElementFoto = {};
   
-  cardElementFoto.name = inputCardName.value;
-  cardElementFoto.link = inputCardPhto.value;
-  inputCardName.value = '';
-  inputCardPhto.value = '';
+//   cardElementFoto.name = inputCardName.value;
+//   cardElementFoto.link = inputCardPhto.value;
+//   inputCardName.value = '';
+//   inputCardPhto.value = '';
   
-  // делает кнопку сабминта неактивной
-  cardFormValidator.toggleButtonState();
+//   // делает кнопку сабминта неактивной
+//   cardFormValidator.toggleButtonState();
   
-  const cards = new Card(cardElementFoto, cardSelector);
-  const cardElement = cards.generateCard ();
+//   const cards = new Card(cardElementFoto, cardSelector);
+//   const cardElement = cards.generateCard ();
 
-  cardContainer.prepend(cardElement);
-  popupFormCard.close();
-  //closePopup(popupAddCard);
-}
+//   cardContainer.prepend(cardElement);
+//   popupFormCard.close();
+//   //closePopup(popupAddCard);
+// }
 
-formAddCard.addEventListener('submit', handleFormAddCardSubmit);
+// formAddCard.addEventListener('submit', handleFormAddCardSubmit);
+
+const formCard = new PopupWithForm({
+  popupSelector: popupAddCard,
+  handleFormSubmit: (FormData) => {
+    // const cardElementFoto = {};
+    // cardElementFoto.name = inputCardName.value;
+    // cardElementFoto.link = inputCardPhto.value;
+    // inputCardName.value = '';
+    // inputCardPhto.value = '';
+    const cards = new Card(FormData, cardSelector);
+    const cardElement = cards.generateCard ();
+    cardContainer.prepend(cardElement);    
+  }  
+});
+// закрытие попапа добавление карточки по сабмиту
+formCard.setEventListeners();
+
 
 // открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
@@ -158,7 +177,7 @@ export const handleOpenImage = (name, link) => {
   popupOpenImage.open(name, link);
 }
 
-// // закрытие попапа кртинки по слушателям
+// закрытие попапа кртинки по слушателям
 popupOpenImage.setEventListeners();
 
 //popupImage.addEventListener('click', handleOverlayClick);
