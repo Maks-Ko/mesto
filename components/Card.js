@@ -1,10 +1,11 @@
-import { handleCardClick } from '../pages/index.js';
+// import { handleCardClick } from '../pages/index.js';
 
 export default class Card {
-  constructor (cardData, cardSelector,) {
+  constructor (cardData, cardSelector, { handleCardClick }) {
       this._name = cardData.name;
       this._link = cardData.link;
-      this._cardSelector = cardSelector;      
+      this._cardSelector = cardSelector;
+      this._handleCardClick = handleCardClick 
   }
 
   // клонируем разметку карточки из HTML
@@ -47,7 +48,7 @@ export default class Card {
   // открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
-      handleCardClick(this._name, this._link);
+      this._handleCardClick(this._name, this._link);
     });
   }
 }

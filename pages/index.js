@@ -51,8 +51,14 @@ formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 // добавление карточек из массива данных 
 const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
 
+const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
+
 function rendererCsrds(cardData) {
-  const cards = new Card(cardData, cardSelector).generateCard();
+  const cards = new Card(cardData, cardSelector, {
+    handleCardClick: (name, link) => {
+      popupOpenImage.open(name, link);
+    }
+  }).generateCard();
   addCards.addItem(cards);
 }
 
@@ -74,20 +80,17 @@ popupFormCard.close();
 const formCard = new PopupWithForm({
   popupSelector: popupAddCard,
   handleFormSubmit: (FormData) => {
-    const cards = new Card(FormData, cardSelector);
+    const cards = new Card(FormData, cardSelector, {
+      handleCardClick: (name, link) => {
+        popupOpenImage.open(name, link);
+      }
+    });
     const cardElement = cards.generateCard ();
     cardContainer.prepend(cardElement);
   }
 });
 
 formCard.setEventListeners();
-
-
-// открытие попапа с картинкой
-const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
-export const handleCardClick = (name, link) => {
-  popupOpenImage.open(name, link);
-}
 
 // закрытие попапа кртинки
 popupOpenImage.close();
