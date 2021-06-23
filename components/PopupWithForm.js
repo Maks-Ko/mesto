@@ -20,7 +20,7 @@ export default class PopupWithForm extends Popup {
     }
 
     setEventListeners() {        
-        this._closeButtom = this._popupSelector.querySelector('.popup__button_close');
+        this._closeButtom = this._popupSelector.querySelector('.popup__button-close');
         this._closeButtom.addEventListener('click', this.close.bind(this));
         
         this._formCard = this._popupSelector.querySelector('.form');

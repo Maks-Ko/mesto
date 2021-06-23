@@ -35,7 +35,7 @@ export default class Popup {
     // метод добавления слушателей
     setEventListeners() {
         // закрытие попапа по крестику
-        const closeButtom = this._popupSelector.querySelector('.popup__button_close');
+        const closeButtom = this._popupSelector.querySelector('.popup__button-close');
         closeButtom.addEventListener('click', this.close.bind(this));
     }
 }
