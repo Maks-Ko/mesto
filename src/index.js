@@ -1,3 +1,5 @@
+import './index.css';
+
 import { initialCards, config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
 import { openEditProfileButton, popupEditProfile, dataUserInfo, formEditProfile, nameInput, aboutMeInput} from '../utils/constants.js';
 import { popupAddCard, openPopupAddCard, formAddCard, cardContainer, popupImage } from '../utils/constants.js';
