@@ -56,6 +56,7 @@ const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
 
 function rendererCsrds(cardData) {
+  //console.log(cardData);
   const cards = new Card(cardData, cardSelector, {
     handleCardClick: (name, link) => {
       popupOpenImage.open(name, link);
@@ -82,8 +83,9 @@ popupFormCard.close();
 const formCard = new PopupWithForm({
   popupSelector: popupAddCard,
   handleFormSubmit: (FormData) => {
+    console.log(FormData);
     const cards = new Card(FormData, cardSelector, {
-      handleCardClick: (name, link) => {
+      handleCardClick: (name, link) => {        
         popupOpenImage.open(name, link);
       }
     });
