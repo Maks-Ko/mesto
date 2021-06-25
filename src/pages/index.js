@@ -1,7 +1,7 @@
 import './index.css';
 
 import { initialCards, config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
-import { openEditProfileButton, popupEditProfile, dataUserInfo, formEditProfile, nameInput, aboutMeInput} from '../utils/constants.js';
+import { openEditProfileButton, popupEditProfile, dataUserInfo, formEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar } from '../utils/constants.js';
 import { popupAddCard, openPopupAddCard, formAddCard, cardContainer, popupImage } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -22,7 +22,8 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, cardForm);
 cardFormValidator.enableValidation();
 
-const userInfo = new UserInfo({ data: dataUserInfo });
+const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
+//const userInfo = new UserInfo({ data: dataUserInfo });
 
 const popupFormProfil = new Popup({ popupSelector: popupEditProfile });
 
@@ -36,8 +37,7 @@ openEditProfileButton.addEventListener('click', function() {
   popupFormProfil.open();
 });
 
-// закрытие попапа редактирование профеля 
-popupFormProfil.close();
+// закрытие попапа редактирование профеля
 popupFormProfil.setEventListeners();
 
 function handleEditProfileFormSubmit (event) {
@@ -76,9 +76,6 @@ openPopupAddCard.addEventListener('click', function() {
   popupFormCard.open();
 });
 
-// закрытие попапа добаления карточки
-popupFormCard.close();
-
 // закрытие попапа добавление карточки по сабмиту
 const formCard = new PopupWithForm({
   popupSelector: popupAddCard,
@@ -97,5 +94,4 @@ const formCard = new PopupWithForm({
 formCard.setEventListeners();
 
 // закрытие попапа кртинки
-popupOpenImage.close();
 popupOpenImage.setEventListeners();

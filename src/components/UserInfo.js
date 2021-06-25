@@ -1,9 +1,9 @@
 import { nameInput, aboutMeInput } from '../utils/constants.js';
 
 export default class UserInfo {
-    constructor({ data }) {
-        this._userName = data.name;
-        this._userProfession = data.profession;
+    constructor({ userName, userProfession }) {
+        this._userName = userName;
+        this._userProfession = userProfession;
     }
     // метод, который возвращает объект с данными пользователя.
     getUserInfo() {
