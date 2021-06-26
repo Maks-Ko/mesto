@@ -22,10 +22,10 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, cardForm);
 cardFormValidator.enableValidation();
 
-// создание экземпляра класса для попапа формы
+// экземпляр класса для попапа редактирования профиля
 const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
 
-// создание экземпляра класса редактирования профиля
+// экземпляр класса редактирования профиля
 const popupUserForm = new PopupWithForm({
   popupSelector: popupEditProfile,
   handleFormSubmit: () => {
@@ -46,55 +46,65 @@ openEditProfileButton.addEventListener('click', function() {
 // закрытие попапа редактирование профеля
 popupUserForm.setEventListeners();
 
-// добавление карточек из массива данных 
+// экземпляр класса добавление карточек из массива данных 
 const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
 
+// экземпляр класса открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
 
+// экземпляр класса создания карточки
 
-// const createCard = new Card(FormData, cardSelector, {
-//   handleCardClick: (name, link) => {
-//     popupOpenImage.open(name, link);
-//   }
-// });
-
-function rendererCsrds(FormData) {  
-  const cards = new Card(FormData, cardSelector, {
+function createCard (cardData) {
+  const createCard = new Card(cardData, cardSelector, {
     handleCardClick: (name, link) => {
       popupOpenImage.open(name, link);
     }
   }).generateCard();
-  //const cardElement = createCard.generateCard();
+  return createCard;
+}
+
+// создание карточек из масива данных
+function rendererCsrds(cardData) {  
+  // const cards = new Card(cardData, cardSelector, {
+  //   handleCardClick: (name, link) => {
+  //     popupOpenImage.open(name, link);
+  //   }
+  // }).generateCard();
+  const cards = createCard(cardData);
   addCards.addItem(cards);
 }
 
 addCards.renderItems();
 
-// открытие попапа добавления карточки
-const popupFormCard = new Popup({ popupSelector: popupAddCard });
-
-openPopupAddCard.addEventListener('click', function() {
-  formAddCard.reset();
-  cardFormValidator.toggleButtonState();
-  popupFormCard.open();
-});
-
-
-// закрытие попапа добавление карточки по сабмиту
+// экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
   popupSelector: popupAddCard,
-  handleFormSubmit: (FormData) => {
-    console.log(FormData);
-    const cards = new Card(FormData, cardSelector, {
-      handleCardClick: (name, link) => {
-        popupOpenImage.open(name, link);
-      }
+  handleFormSubmit: (cardData) => {
+    // const cards = new Card(
+    //   {
+    //     name: image_name.value,
+    //     link: url_image.value
+    //   },
+    //   cardSelector, {
+    //   handleCardClick: (name, link) => {
+    //     popupOpenImage.open(name, link);
+    //   }
+    // }).generateCard();
+    const cards = createCard({
+      name: image_name.value,
+      link: url_image.value
     });
-    const cardElement = cards.generateCard();
-    cardContainer.prepend(cardElement);
+    addCards.addItem(cards);
   }
 });
 
+// открытие попапа добавления карточки
+openPopupAddCard.addEventListener('click', function() {
+  cardFormValidator.toggleButtonState();
+  formCard.open();
+});
+
+// звкрытие попапа добавление карточки
 formCard.setEventListeners();
 
 // закрытие попапа кртинки
