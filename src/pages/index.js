@@ -22,10 +22,16 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, cardForm);
 cardFormValidator.enableValidation();
 
+// создание экземпляра класса для попапа формы
 const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
-//const userInfo = new UserInfo({ data: dataUserInfo });
 
-const popupFormProfil = new Popup({ popupSelector: popupEditProfile });
+// создание экземпляра класса редактирования профиля
+const popupUserForm = new PopupWithForm({
+  popupSelector: popupEditProfile,
+  handleFormSubmit: () => {
+    userInfo.setUserInfo();
+  }
+});
 
 // открытие попапа редактирования профиля
 openEditProfileButton.addEventListener('click', function() {  
@@ -34,34 +40,31 @@ openEditProfileButton.addEventListener('click', function() {
   nameInput.value = userInfoIput.name;
   aboutMeInput.value = userInfoIput.profession;
 
-  popupFormProfil.open();
+  popupUserForm.open();
 });
 
 // закрытие попапа редактирование профеля
-popupFormProfil.setEventListeners();
-
-function handleEditProfileFormSubmit (event) {
-  event.preventDefault();
-
-  userInfo.setUserInfo();
-  
-  popupFormProfil.close();
-}
-
-formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
+popupUserForm.setEventListeners();
 
 // добавление карточек из массива данных 
 const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
 
 const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
 
-function rendererCsrds(cardData) {
-  //console.log(cardData);
-  const cards = new Card(cardData, cardSelector, {
+
+// const createCard = new Card(FormData, cardSelector, {
+//   handleCardClick: (name, link) => {
+//     popupOpenImage.open(name, link);
+//   }
+// });
+
+function rendererCsrds(FormData) {  
+  const cards = new Card(FormData, cardSelector, {
     handleCardClick: (name, link) => {
       popupOpenImage.open(name, link);
     }
   }).generateCard();
+  //const cardElement = createCard.generateCard();
   addCards.addItem(cards);
 }
 
@@ -76,17 +79,18 @@ openPopupAddCard.addEventListener('click', function() {
   popupFormCard.open();
 });
 
+
 // закрытие попапа добавление карточки по сабмиту
 const formCard = new PopupWithForm({
   popupSelector: popupAddCard,
   handleFormSubmit: (FormData) => {
     console.log(FormData);
     const cards = new Card(FormData, cardSelector, {
-      handleCardClick: (name, link) => {        
+      handleCardClick: (name, link) => {
         popupOpenImage.open(name, link);
       }
     });
-    const cardElement = cards.generateCard ();
+    const cardElement = cards.generateCard();
     cardContainer.prepend(cardElement);
   }
 });
