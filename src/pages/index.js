@@ -30,6 +30,7 @@ const popupUserForm = new PopupWithForm({
   popupSelector: popupEditProfile,
   handleFormSubmit: () => {
     userInfo.setUserInfo();
+    popupUserForm.close();
   }
 });
 
@@ -94,6 +95,7 @@ const formCard = new PopupWithForm({
       name: image_name.value,
       link: url_image.value
     });
+    formCard.close();
     addCards.addItem(cards);
   }
 });
