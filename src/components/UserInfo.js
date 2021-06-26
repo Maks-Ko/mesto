@@ -1,5 +1,3 @@
-import { nameInput, aboutMeInput } from '../utils/constants.js';
-
 export default class UserInfo {
     constructor({ userName, userProfession }) {
         this._userName = userName;
@@ -12,9 +10,9 @@ export default class UserInfo {
         this._userInfo.profession =  this._userProfession.textContent;
         return this._userInfo;
     }
-    // метод, который принимает новые данные пользователя и добавляет их на страницу.
-    setUserInfo() {
-        this._userName.textContent = nameInput.value;
-        this._userProfession.textContent = aboutMeInput.value;
+    // метод, который принимает новые данные пользователя и добавляет их на страницу
+    setUserInfo({ userNameInput, userProfessionInput }) {
+        this._userName.textContent = userNameInput;
+        this._userProfession.textContent = userProfessionInput;
     }
 }

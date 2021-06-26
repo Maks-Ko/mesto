@@ -1,5 +1,3 @@
-// import { handleCardClick } from '../pages/index.js';
-
 export default class Card {
   constructor (cardData, cardSelector, { handleCardClick }) {
       this._name = cardData.name;
