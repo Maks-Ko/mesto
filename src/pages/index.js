@@ -27,7 +27,7 @@ const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAva
 
 // экземпляр класса редактирования профиля
 const popupUserForm = new PopupWithForm({
-  popupSelector: popupEditProfile,
+  popup: popupEditProfile,
   handleFormSubmit: () => {
     userInfo.setUserInfo();
     popupUserForm.close();
@@ -51,7 +51,7 @@ popupUserForm.setEventListeners();
 const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
 
 // экземпляр класса открытие попапа с картинкой
-const popupOpenImage = new PopupWithImage({ popupSelector: popupImage });
+const popupOpenImage = new PopupWithImage({ popup: popupImage });
 
 // экземпляр класса создания карточки
 
@@ -79,7 +79,7 @@ addCards.renderItems();
 
 // экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
-  popupSelector: popupAddCard,
+  popup: popupAddCard,
   handleFormSubmit: (cardData) => {
     // const cards = new Card(
     //   {
