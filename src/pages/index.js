@@ -10,6 +10,46 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+const apiUser = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/users/me',
+  headers: {
+    authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
+  }
+});
+
+apiUser.getUserInfoApi()
+.then((data) => {
+  const nameAv = document.querySelector('.profile-info__title');
+  const aboutMe = document.querySelector('.profile-info__text');
+  const avatar = document.querySelector('.profile__avatar');
+  nameAv.textContent = data.name;
+  aboutMe.textContent = data.about;
+  avatar.src = data.avatar;
+  
+  console.log(data);
+})
+.catch((err) => {
+  console.log(err); // "Что-то пошло не так: ..."
+});
+
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-26/users/me', {
+//   headers: {
+//     authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
+//   }
+// })
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log('Ошибка. Запрос не выполнен: ', err);
+//   });
+
 
 // проверка на валидность полей редактирования профиля
 const profileFormValidator = new FormValidator(config, profileForm);
