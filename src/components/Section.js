@@ -6,8 +6,8 @@ export default class Section {
     }
 
     // отрисовка всех элементов
-    renderItems() {
-        this._initialItems.forEach((data) => {
+    renderItems(items) {
+        items.forEach((data) => {
             this._renderer(data);
         });
     }

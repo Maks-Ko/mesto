@@ -5,7 +5,7 @@ export default class Api {
     }
 
     // получаем данные пользователя
-    getUserInfoApi() {
+    getItems() {
         return fetch(this._baseUrl, {
             headers: this._headers
         })

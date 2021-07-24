@@ -19,7 +19,15 @@ const apiUser = new Api({
   }
 });
 
-apiUser.getUserInfoApi()
+const apiCard = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/cards',
+  headers: {
+    authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
+  }
+});
+
+// получить поля профиля с сервера
+apiUser.getItems()
 .then((data) => {
   const nameAv = document.querySelector('.profile-info__title');
   const aboutMe = document.querySelector('.profile-info__text');
@@ -27,28 +35,19 @@ apiUser.getUserInfoApi()
   nameAv.textContent = data.name;
   aboutMe.textContent = data.about;
   avatar.src = data.avatar;
-  
-  console.log(data);
 })
 .catch((err) => {
   console.log(err); // "Что-то пошло не так: ..."
 });
 
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-26/users/me', {
-//   headers: {
-//     authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
-//   }
-// })
-//   .then((res) => {
-//     return res.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((err) => {
-//     console.log('Ошибка. Запрос не выполнен: ', err);
-//   });
+// получить карточки с сервера
+apiCard.getItems()
+.then((data) => {
+  addCards.renderItems(data);
+})
+.catch((err) => {
+  console.log(err); // "Что-то пошло не так: ..."
+});
 
 
 // проверка на валидность полей редактирования профиля
@@ -88,7 +87,7 @@ openEditProfileButton.addEventListener('click', function() {
 popupUserForm.setEventListeners();
 
 // экземпляр класса добавление карточек из массива данных 
-const addCards = new Section({ items: initialCards, renderer: rendererCsrds }, '.elements');
+const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 
 // экземпляр класса открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popup: popupImage });
@@ -110,7 +109,7 @@ function rendererCsrds(cardData) {
   addCards.addItem(cards);
 }
 
-addCards.renderItems();
+//addCards.renderItems();
 
 // экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
