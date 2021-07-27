@@ -1,11 +1,12 @@
 export default class Card {
-  constructor (cardData, cardSelector, { handleCardClick }) {
+  constructor (cardData, cardSelector, { handleCardClick, handleCardClickdelete }) {
       this._name = cardData.name;
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
       this._id = cardData.owner._id;
       this._cardSelector = cardSelector;
-      this._handleCardClick = handleCardClick 
+      this._handleCardClick = handleCardClick;
+      this._handleCardClickdelete = handleCardClickdelete;
   }
 
   // клонируем разметку карточки из HTML
@@ -21,8 +22,10 @@ export default class Card {
     this._cardLike ();
     this.cardLikeNumder();
     this._deleteButtonCard();
-    this._cardDelete ();
+    //this._cardDelete ();
     this._openPopupImage ();
+    this._openPopupWithDeleteCard()
+
 
     this._image = this._element.querySelector('.element__foto');      
     this._element.querySelector('.element__title').textContent = this._name;
@@ -52,16 +55,23 @@ export default class Card {
   }
   
   // удаление карточки
-  _cardDelete () {
-    this._element.querySelector('.element__delete').addEventListener('click', function(del) {
-      del.target.closest('.element').remove();
-    });
-  }
+  // _cardDelete () {
+  //   this._element.querySelector('.element__delete').addEventListener('click', function(del) {
+  //     del.target.closest('.element').remove();
+  //   });
+  // }
   
   // открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
+  }
+
+  // открытие попапа удаления карточки
+  _openPopupWithDeleteCard() {
+    this._element.querySelector('.element__delete').addEventListener('click', () => {
+      this._handleCardClickdelete();
+    })
   }
 }

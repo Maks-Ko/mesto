@@ -1,6 +1,6 @@
 export { keyEscape, config, cardSelector, profileForm, cardForm };
 export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, formEditProfile, nameInput, aboutMeInput};
-export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo};
+export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo, popupDeleteCard};
 export {popupImage, closePopupImage, popupImageContent, popupImageTitle};
 
 // const initialCards = [
@@ -76,3 +76,6 @@ const popupImage = document.querySelector('.popup_type_image');
 const closePopupImage = popupImage.querySelector('.images-content__button');
 const popupImageContent = popupImage.querySelector('.images-content__foto');
 const popupImageTitle = popupImage.querySelector('.images-content__title');
+
+// popup удаления карточки
+const popupDeleteCard = document.querySelector('.popup_type_delete-card');

@@ -2,13 +2,14 @@ import './index.css';
 
 import { config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
 import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar, avatar } from '../utils/constants.js';
-import { popupAddCard, openPopupAddCard, popupImage } from '../utils/constants.js';
+import { popupAddCard, openPopupAddCard, popupImage, popupDeleteCard } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -95,11 +96,20 @@ const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 // экземпляр класса открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popup: popupImage });
 
+// экземпляр класса удаления карточки
+const popupOpenDeleteCard = new PopupWithDeleteCard({ popup: popupDeleteCard });
+
+// закрытие попапа удаления карточки
+popupOpenDeleteCard.setEventListeners();
+
 // экземпляр класса создания карточки
 function createCard (cardData) {
   const createCard = new Card(cardData, cardSelector, {
     handleCardClick: (name, link) => {
       popupOpenImage.open(name, link);
+    },
+    handleCardClickdelete: () => {
+      popupOpenDeleteCard.open();
     }
   }).generateCard();
   return createCard;
@@ -152,5 +162,5 @@ openPopupAddCard.addEventListener('click', function() {
 // звкрытие попапа добавление карточки
 formCard.setEventListeners();
 
-// закрытие попапа кртинки
+// закрытие попапа картинки
 popupOpenImage.setEventListeners();

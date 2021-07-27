@@ -54,3 +54,5 @@
 @import url(../blocks/images-content/__button/images-content__button.css);
 @import url(../blocks/images-content/__foto/images-content__foto.css);
 @import url(../blocks/images-content/__title/images-content__title.css);
+
+@import url(../blocks/popup/_type/popup_type_delete-card.css);
