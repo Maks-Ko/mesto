@@ -3,6 +3,7 @@ export default class Card {
       this._name = cardData.name;
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
+      this._id = cardData.owner._id;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick 
   }
@@ -18,7 +19,8 @@ export default class Card {
   generateCard () {
     this._element = this._getTemplate ();
     this._cardLike ();
-    this.cardLikeNumder()
+    this.cardLikeNumder();
+    this._deleteButtonCard();
     this._cardDelete ();
     this._openPopupImage ();
 
@@ -26,7 +28,7 @@ export default class Card {
     this._element.querySelector('.element__title').textContent = this._name;
     this._image.src = this._link;
     this._image.alt = this._name;
-      
+
     return this._element;
   }
 
@@ -40,6 +42,13 @@ export default class Card {
   // количество лайков
   cardLikeNumder() {
     this._element.querySelector('.element__numder-likes').textContent = this._numberLikes.length;
+  }
+
+  // убирает кнопку удаления крточки
+  _deleteButtonCard() {
+    if (this._id == 'e8f05256dab4a2c5dbaf43a4') {
+      this._element.querySelector('.element__delete').classList.add('element__delete_show');
+    }
   }
   
   // удаление карточки

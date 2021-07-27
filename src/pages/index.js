@@ -27,7 +27,8 @@ api.getAllNeededData()
   nameAvatar.textContent = dateFormUser.name;
   aboutMeAvatar.textContent = dateFormUser.about;
   avatar.src = dateFormUser.avatar;
-
+  
+  console.log(dateCards);
   addCards.renderItems(dateCards);
 })
 .catch((err) => {
@@ -132,7 +133,7 @@ const formCard = new PopupWithForm({
       const cards = createCard({
         name: data.name,
         link: data.link,
-      });      
+      });
       addCards.addItem(cards);
     })
     .catch((err) => {
