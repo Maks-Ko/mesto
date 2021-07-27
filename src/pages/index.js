@@ -63,7 +63,6 @@ const popupUserForm = new PopupWithForm({
     });    
     apiEditForm.editProfile()
     .then((data) => {
-      console.log(data);
       userInfo.setUserInfo({
         userNameInput:  data.name,
         userProfessionInput: data.about
@@ -96,7 +95,6 @@ const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 const popupOpenImage = new PopupWithImage({ popup: popupImage });
 
 // экземпляр класса создания карточки
-
 function createCard (cardData) {
   const createCard = new Card(cardData, cardSelector, {
     handleCardClick: (name, link) => {
@@ -118,12 +116,29 @@ function rendererCsrds(cardData) {
 const formCard = new PopupWithForm({
   popup: popupAddCard,
   handleFormSubmit: () => {
-    const cards = createCard({
-      name: image_name.value,
-      link: url_image.value
-    });
+    const apiAddCard = new Api({
+      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
+      headers: {
+        authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: image_name.value,
+        link: url_image.value
+      })
+    });    
+    apiAddCard.addCardForm()
+    .then((data) => {
+      const cards = createCard({
+        name: data.name,
+        link: data.link
+      });
+      addCards.addItem(cards);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });    
     formCard.close();
-    addCards.addItem(cards);
   }
 });
 
