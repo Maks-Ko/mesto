@@ -131,8 +131,8 @@ const formCard = new PopupWithForm({
     .then((data) => {
       const cards = createCard({
         name: data.name,
-        link: data.link
-      });
+        link: data.link,
+      });      
       addCards.addItem(cards);
     })
     .catch((err) => {
