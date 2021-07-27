@@ -1,7 +1,7 @@
 import './index.css';
 
-import { initialCards, config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
-import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar } from '../utils/constants.js';
+import { config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
+import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar, avatar } from '../utils/constants.js';
 import { popupAddCard, openPopupAddCard, popupImage } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -12,43 +12,27 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
-const apiUser = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/users/me',
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
   headers: {
     authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
   }
 });
 
-const apiCard = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/cards',
-  headers: {
-    authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
-  }
-});
+// добавить первоначальные данные
+api.getAllNeededData()
+.then((date) => {
+  const [ dateFormUser, dateCards] = date;
 
-// получить поля профиля с сервера
-apiUser.getItems()
-.then((data) => {
-  const nameAv = document.querySelector('.profile-info__title');
-  const aboutMe = document.querySelector('.profile-info__text');
-  const avatar = document.querySelector('.profile__avatar');
-  nameAv.textContent = data.name;
-  aboutMe.textContent = data.about;
-  avatar.src = data.avatar;
+  nameAvatar.textContent = dateFormUser.name;
+  aboutMeAvatar.textContent = dateFormUser.about;
+  avatar.src = dateFormUser.avatar;
+
+  addCards.renderItems(dateCards);
 })
 .catch((err) => {
   console.log(err); // "Что-то пошло не так: ..."
 });
-
-// получить карточки с сервера
-apiCard.getItems()
-.then((data) => {
-  addCards.renderItems(data);
-})
-.catch((err) => {
-  console.log(err); // "Что-то пошло не так: ..."
-});
-
 
 // проверка на валидность полей редактирования профиля
 const profileFormValidator = new FormValidator(config, profileForm);
@@ -65,9 +49,28 @@ const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAva
 const popupUserForm = new PopupWithForm({
   popup: popupEditProfile,
   handleFormSubmit: () => {
-    userInfo.setUserInfo({
-      userNameInput:  nameInput.value,
-      userProfessionInput: aboutMeInput.value
+    // редактирование профиля на сервере
+    const apiEditForm = new Api({
+      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
+      headers: {
+        authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: nameInput.value,
+        about: aboutMeInput.value
+      })
+    });    
+    apiEditForm.editProfile()
+    .then((data) => {
+      console.log(data);
+      userInfo.setUserInfo({
+        userNameInput:  data.name,
+        userProfessionInput: data.about
+      });
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
     });
     popupUserForm.close();
   }
@@ -75,7 +78,7 @@ const popupUserForm = new PopupWithForm({
 
 // открытие попапа редактирования профиля
 openEditProfileButton.addEventListener('click', function() {
-  const userInfoIput = userInfo.getUserInfo();
+  const userInfoIput = userInfo.getUserInfo();  
   
   nameInput.value = userInfoIput.name;
   aboutMeInput.value = userInfoIput.profession;
