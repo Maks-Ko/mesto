@@ -1,8 +1,9 @@
 export default class Api {
-    constructor({ baseUrl, headers, body }) {
+    constructor({ baseUrl, headers, body, idCard }) {
         this._baseUrl = baseUrl;
         this._headers = headers;
         this._body = body;
+        this._idCard = idCard;
     }
 
     // получаем данные пользователя
@@ -64,4 +65,18 @@ export default class Api {
             return Promise.reject(`Ошибка: ${res.status}`);            
         })
     }
+
+    // удаление карточки
+    deleteCardUser() {
+        return fetch(`${this._baseUrl}/cards/${this._idCard}`, {
+            method: 'DELETE'
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);            
+        })
+    }
+
 }

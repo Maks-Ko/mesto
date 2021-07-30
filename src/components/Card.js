@@ -1,12 +1,14 @@
 export default class Card {
-  constructor (cardData, cardSelector, { handleCardClick, handleCardClickdelete }) {
+  constructor (cardData, cardSelector, { handleCardClick, handleCardClickdelete, handleDeleteClick }) {
       this._name = cardData.name;
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
-      this._id = cardData.owner._id;
+      this._user = cardData.owner;
+      this._idCard = cardData._id;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._handleCardClickdelete = handleCardClickdelete;
+      this._handleDeleteClick = handleDeleteClick;
   }
 
   // клонируем разметку карточки из HTML
@@ -21,10 +23,11 @@ export default class Card {
     this._element = this._getTemplate ();
     this._cardLike ();
     this.cardLikeNumder();
-    this._deleteButtonCard();
+    this._addDeleteButtonCard();
     //this._cardDelete ();
     this._openPopupImage ();
     this._openPopupWithDeleteCard()
+    this._deleteCard();
 
 
     this._image = this._element.querySelector('.element__foto');      
@@ -48,8 +51,9 @@ export default class Card {
   }
 
   // убирает кнопку удаления крточки
-  _deleteButtonCard() {
-    if (this._id == 'e8f05256dab4a2c5dbaf43a4') {
+  _addDeleteButtonCard() {
+    this._idUser = this._user._id;
+    if (this._idUser == 'e8f05256dab4a2c5dbaf43a4') {
       this._element.querySelector('.element__delete').classList.add('element__delete_show');
     }
   }
@@ -70,8 +74,15 @@ export default class Card {
 
   // открытие попапа удаления карточки
   _openPopupWithDeleteCard() {
+    this._element.querySelector('.element__delete').addEventListener('click', () => {      
+      this._handleCardClickdelete();      
+    });
+  }
+
+  // удаление карточки
+  _deleteCard() {
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._handleCardClickdelete();
-    })
+      this._handleDeleteClick(this._idCard);
+    });
   }
 }

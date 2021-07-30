@@ -36,6 +36,8 @@ api.getAllNeededData()
   console.log(err); // "Что-то пошло не так: ..."
 });
 
+
+
 // проверка на валидность полей редактирования профиля
 const profileFormValidator = new FormValidator(config, profileForm);
 profileFormValidator.enableValidation();
@@ -46,6 +48,8 @@ cardFormValidator.enableValidation();
 
 // экземпляр класса для попапа редактирования профиля
 const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
+
+
 
 // экземпляр класса редактирования профиля
 const popupUserForm = new PopupWithForm({
@@ -62,7 +66,7 @@ const popupUserForm = new PopupWithForm({
         name: nameInput.value,
         about: aboutMeInput.value
       })
-    });    
+    });
     apiEditForm.editProfile()
     .then((data) => {
       userInfo.setUserInfo({
@@ -90,17 +94,37 @@ openEditProfileButton.addEventListener('click', function() {
 // закрытие попапа редактирование профеля
 popupUserForm.setEventListeners();
 
+
+
 // экземпляр класса добавление карточек из массива данных 
 const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 
 // экземпляр класса открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popup: popupImage });
-
+let idCardDel = null;
 // экземпляр класса удаления карточки
-const popupOpenDeleteCard = new PopupWithDeleteCard({ popup: popupDeleteCard });
+const popupOpenDeleteCard = new PopupWithDeleteCard({
+  popup: popupDeleteCard,
+  handleFormSubmit: () => {
+    console.log(idCardDel);
+    const apiDeleteCard = new Api({
+      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
+      idCard: idCardDel
+    });
+    apiDeleteCard.deleteCardUser()
+    .then(() => {      
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+    popupOpenDeleteCard.close();
+  }
+});
 
 // закрытие попапа удаления карточки
 popupOpenDeleteCard.setEventListeners();
+// popupOpenDeleteCard.setSubmitAction();
+
 
 // экземпляр класса создания карточки
 function createCard (cardData) {
@@ -110,10 +134,15 @@ function createCard (cardData) {
     },
     handleCardClickdelete: () => {
       popupOpenDeleteCard.open();
+    },
+    handleDeleteClick: (idCard) => {
+      idCardDel = idCard;
+      popupOpenDeleteCard.setSubmitAction();
     }
   }).generateCard();
   return createCard;
 }
+
 
 // создание карточек из масива данных
 function rendererCsrds(cardData) {
@@ -122,6 +151,7 @@ function rendererCsrds(cardData) {
 }
 
 //addCards.renderItems();
+
 
 // экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
@@ -137,18 +167,15 @@ const formCard = new PopupWithForm({
         name: image_name.value,
         link: url_image.value
       })
-    });    
+    });
     apiAddCard.addCardForm()
     .then((data) => {
-      const cards = createCard({
-        name: data.name,
-        link: data.link,
-      });
+      const cards = createCard(data);
       addCards.addItem(cards);
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
-    });    
+    });
     formCard.close();
   }
 });
