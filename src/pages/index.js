@@ -12,12 +12,66 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+let idCard = null;
+// экземпляр класса редактирования профиля
+const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
+
+// экземпляр класса добавление карточек
+const addCards = new Section({ renderer: rendererCsrds }, '.elements');
+
+
+// экземпляр класса создания карточки
+function createCard (cardData) {
+  const createCard = new Card(cardData, cardSelector, {
+    handleCardClick: (name, link) => {
+      popupOpenImage.open(name, link);
+    },
+    handleDeleteClick: (cardInstance) => {
+      cardDelete(cardInstance);
+    }
+  }).generateCard();
+  return createCard;
+}
+
+// экземпляр класса удаления карточки
+const popupOpenDeleteCard = new PopupWithDeleteCard({ popup: popupDeleteCard });
+
+// закрытие попапа удаления карточки
+popupOpenDeleteCard.setEventListeners();
+
+// удаление карточки
+function cardDelete(cardInstance) {
+  popupOpenDeleteCard.setSubmitAction(() => {
+    api.deleteCardUser(cardInstance._idCard)
+    .then(() => {
+      cardInstance.cardDelete();
+      popupOpenDeleteCard.close();
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+  });
+  popupOpenDeleteCard.open();
+}
+
+// создание карточек из масива данных
+function rendererCsrds(cardData) {
+  const cards = createCard(cardData);
+  addCards.addItem(cards);
+}
+
+// экземпляр класса открытие попапа с картинкой
+const popupOpenImage = new PopupWithImage({ popup: popupImage });
+// закрытие попапа картинки
+popupOpenImage.setEventListeners();
+
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
   headers: {
-    authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6'
-  }
+    authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6',
+    'Content-Type': 'application/json'
+  },
 });
 
 // добавить первоначальные данные
@@ -36,38 +90,17 @@ api.getAllNeededData()
   console.log(err); // "Что-то пошло не так: ..."
 });
 
-
-
-// проверка на валидность полей редактирования профиля
-const profileFormValidator = new FormValidator(config, profileForm);
-profileFormValidator.enableValidation();
-
-// проверка на валидность полей добавления крточки
-const cardFormValidator = new FormValidator(config, cardForm);
-cardFormValidator.enableValidation();
-
-// экземпляр класса для попапа редактирования профиля
-const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
-
-
-
 // экземпляр класса редактирования профиля
 const popupUserForm = new PopupWithForm({
   popup: popupEditProfile,
   handleFormSubmit: () => {
     // редактирование профиля на сервере
-    const apiEditForm = new Api({
-      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
-      headers: {
-        authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    api.editProfile({
+      bodyUser: JSON.stringify({
         name: nameInput.value,
         about: aboutMeInput.value
       })
-    });
-    apiEditForm.editProfile()
+    })
     .then((data) => {
       userInfo.setUserInfo({
         userNameInput:  data.name,
@@ -94,81 +127,17 @@ openEditProfileButton.addEventListener('click', function() {
 // закрытие попапа редактирование профеля
 popupUserForm.setEventListeners();
 
-
-
-// экземпляр класса добавление карточек из массива данных 
-const addCards = new Section({ renderer: rendererCsrds }, '.elements');
-
-// экземпляр класса открытие попапа с картинкой
-const popupOpenImage = new PopupWithImage({ popup: popupImage });
-let idCardDel = null;
-// экземпляр класса удаления карточки
-const popupOpenDeleteCard = new PopupWithDeleteCard({
-  popup: popupDeleteCard,
-  handleFormSubmit: () => {
-    console.log(idCardDel);
-    const apiDeleteCard = new Api({
-      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
-      idCard: idCardDel
-    });
-    apiDeleteCard.deleteCardUser()
-    .then(() => {      
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-    });
-    popupOpenDeleteCard.close();
-  }
-});
-
-// закрытие попапа удаления карточки
-popupOpenDeleteCard.setEventListeners();
-// popupOpenDeleteCard.setSubmitAction();
-
-
-// экземпляр класса создания карточки
-function createCard (cardData) {
-  const createCard = new Card(cardData, cardSelector, {
-    handleCardClick: (name, link) => {
-      popupOpenImage.open(name, link);
-    },
-    handleCardClickdelete: () => {
-      popupOpenDeleteCard.open();
-    },
-    handleDeleteClick: (idCard) => {
-      idCardDel = idCard;
-      popupOpenDeleteCard.setSubmitAction();
-    }
-  }).generateCard();
-  return createCard;
-}
-
-
-// создание карточек из масива данных
-function rendererCsrds(cardData) {
-  const cards = createCard(cardData);
-  addCards.addItem(cards);
-}
-
-//addCards.renderItems();
-
-
 // экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
   popup: popupAddCard,
   handleFormSubmit: () => {
-    const apiAddCard = new Api({
-      baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
-      headers: {
-        authorization: 'd3e97d43-b7f6-462d-a435-bd7e94d9d5b6',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    // добавление карточки на сервер
+    api.addCardForm({
+      bodyAddCard: JSON.stringify({
         name: image_name.value,
         link: url_image.value
       })
-    });
-    apiAddCard.addCardForm()
+    })
     .then((data) => {
       const cards = createCard(data);
       addCards.addItem(cards);
@@ -189,5 +158,13 @@ openPopupAddCard.addEventListener('click', function() {
 // звкрытие попапа добавление карточки
 formCard.setEventListeners();
 
-// закрытие попапа картинки
-popupOpenImage.setEventListeners();
+
+
+
+// проверка на валидность полей редактирования профиля
+const profileFormValidator = new FormValidator(config, profileForm);
+profileFormValidator.enableValidation();
+
+// проверка на валидность полей добавления крточки
+const cardFormValidator = new FormValidator(config, cardForm);
+cardFormValidator.enableValidation();

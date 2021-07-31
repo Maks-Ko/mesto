@@ -1,9 +1,7 @@
 export default class Api {
-    constructor({ baseUrl, headers, body, idCard }) {
+    constructor({ baseUrl, headers }) {
         this._baseUrl = baseUrl;
         this._headers = headers;
-        this._body = body;
-        this._idCard = idCard;
     }
 
     // получаем данные пользователя
@@ -37,11 +35,11 @@ export default class Api {
     }
 
     // редактирование профиля
-    editProfile() {
+    editProfile({ bodyUser }) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
-            body: this._body
+            body: bodyUser
         })
         .then((res) => {
             if (res.ok) {
@@ -52,11 +50,11 @@ export default class Api {
     }
 
     // добавление карточки
-    addCardForm() {
+    addCardForm({ bodyAddCard }) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: this._body
+            body: bodyAddCard
         })
         .then((res) => {
             if (res.ok) {
@@ -67,9 +65,10 @@ export default class Api {
     }
 
     // удаление карточки
-    deleteCardUser() {
-        return fetch(`${this._baseUrl}/cards/${this._idCard}`, {
-            method: 'DELETE'
+    deleteCardUser(idCard) {
+        return fetch(`${this._baseUrl}/cards/${idCard}`, {
+            method: 'DELETE',
+            headers: this._headers,
         })
         .then((res) => {
             if (res.ok) {

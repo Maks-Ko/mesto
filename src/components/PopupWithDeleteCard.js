@@ -6,21 +6,18 @@ export default class PopupWithDeleteCard extends Popup {
         this._handleFormSubmit = handleFormSubmit;
     }
     
-    // setEventListeners() {
-    //     super.setEventListeners();
+    setEventListeners() {
+        super.setEventListeners();
 
-    //     this._buttonClous = this._popup.querySelector('.form');
-    //     this._buttonClous.addEventListener('submit', (evt) => {
-    //         evt.preventDefault();
-    //         this._handleFormSubmit();
-    //     });
-    // }
-
-    setSubmitAction() {
         this._buttonClous = this._popup.querySelector('.form');
         this._buttonClous.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._handleFormSubmit();
+            this._action();
+            //this._handleFormSubmit();
         });
+    }
+
+    setSubmitAction(action) {
+        this._action = action;
     }
 }

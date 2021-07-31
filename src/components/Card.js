@@ -1,5 +1,5 @@
 export default class Card {
-  constructor (cardData, cardSelector, { handleCardClick, handleCardClickdelete, handleDeleteClick }) {
+  constructor (cardData, cardSelector, { handleCardClick, handleDeleteClick }) {
       this._name = cardData.name;
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
@@ -7,7 +7,6 @@ export default class Card {
       this._idCard = cardData._id;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
-      this._handleCardClickdelete = handleCardClickdelete;
       this._handleDeleteClick = handleDeleteClick;
   }
 
@@ -24,9 +23,7 @@ export default class Card {
     this._cardLike ();
     this.cardLikeNumder();
     this._addDeleteButtonCard();
-    //this._cardDelete ();
     this._openPopupImage ();
-    this._openPopupWithDeleteCard()
     this._deleteCard();
 
 
@@ -59,30 +56,23 @@ export default class Card {
   }
   
   // удаление карточки
-  // _cardDelete () {
-  //   this._element.querySelector('.element__delete').addEventListener('click', function(del) {
-  //     del.target.closest('.element').remove();
-  //   });
-  // }
-  
-  // открытие попапа картинки
+  cardDelete() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  // слушатель удаление карточки
+  _deleteCard() {
+    this._element.querySelector('.element__delete').addEventListener('click', (evt) => {
+      evt.preventDefault();   
+      this._handleDeleteClick(this);
+    });
+  }
+
+  // слушатель открытие попапа картинки
   _openPopupImage () {
     this._element.querySelector('.element__foto').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
-    });
-  }
-
-  // открытие попапа удаления карточки
-  _openPopupWithDeleteCard() {
-    this._element.querySelector('.element__delete').addEventListener('click', () => {      
-      this._handleCardClickdelete();      
-    });
-  }
-
-  // удаление карточки
-  _deleteCard() {
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._handleDeleteClick(this._idCard);
     });
   }
 }
