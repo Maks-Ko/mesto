@@ -78,4 +78,17 @@ export default class Api {
         })
     }
 
+    // добавление - удаление лайка карточки    
+    toggleLikeCard(idCard, isLike) {
+        return fetch(`${this._baseUrl}/cards/likes/${idCard}`, {
+            method: isLike ? 'DELETE' : 'PUT',
+            headers: this._headers,
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);            
+        })
+    }
 }

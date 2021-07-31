@@ -12,46 +12,27 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-let idCard = null;
+
 // экземпляр класса редактирования профиля
 const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
 
 // экземпляр класса добавление карточек
 const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 
-
 // экземпляр класса создания карточки
 function createCard (cardData) {
   const createCard = new Card(cardData, cardSelector, {
-    handleCardClick: (name, link) => {
+    handlePopupImageCard: (name, link) => {
       popupOpenImage.open(name, link);
     },
-    handleDeleteClick: (cardInstance) => {
+    handleDeleteCard: (cardInstance) => {
       cardDelete(cardInstance);
+    },
+    handleleLikeCard: (cardInstance) => {
+      likeCard(cardInstance);
     }
   }).generateCard();
   return createCard;
-}
-
-// экземпляр класса удаления карточки
-const popupOpenDeleteCard = new PopupWithDeleteCard({ popup: popupDeleteCard });
-
-// закрытие попапа удаления карточки
-popupOpenDeleteCard.setEventListeners();
-
-// удаление карточки
-function cardDelete(cardInstance) {
-  popupOpenDeleteCard.setSubmitAction(() => {
-    api.deleteCardUser(cardInstance._idCard)
-    .then(() => {
-      cardInstance.cardDelete();
-      popupOpenDeleteCard.close();
-    })
-    .catch((err) => {
-      console.log(err); // "Что-то пошло не так: ..."
-    });
-  });
-  popupOpenDeleteCard.open();
 }
 
 // создание карточек из масива данных
@@ -59,6 +40,12 @@ function rendererCsrds(cardData) {
   const cards = createCard(cardData);
   addCards.addItem(cards);
 }
+
+// экземпляр класса удаления карточки
+const popupOpenDeleteCard = new PopupWithDeleteCard({ popup: popupDeleteCard });
+
+// закрытие попапа удаления карточки
+popupOpenDeleteCard.setEventListeners();
 
 // экземпляр класса открытие попапа с картинкой
 const popupOpenImage = new PopupWithImage({ popup: popupImage });
@@ -158,8 +145,32 @@ openPopupAddCard.addEventListener('click', function() {
 // звкрытие попапа добавление карточки
 formCard.setEventListeners();
 
+// функция удаления карточки
+function cardDelete(cardInstance) {
+  popupOpenDeleteCard.setSubmitAction(() => {
+    api.deleteCardUser(cardInstance._idCard)
+    .then(() => {
+      cardInstance.cardDelete();
+      popupOpenDeleteCard.close();
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+  });
+  popupOpenDeleteCard.open();
+}
 
-
+// функция лайка карточки
+function likeCard(cardInstance) {
+  cardInstance.isLike();
+  api.toggleLikeCard(cardInstance._idCard, cardInstance._isLike)
+  .then((data) => {
+    cardInstance.isLikeButton(data);    
+  })
+  .catch((err) => {
+    console.log(err); // "Что-то пошло не так: ..."
+  })
+}
 
 // проверка на валидность полей редактирования профиля
 const profileFormValidator = new FormValidator(config, profileForm);
