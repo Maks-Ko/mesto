@@ -2,7 +2,7 @@ import './index.css';
 
 import { config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
 import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar, avatar } from '../utils/constants.js';
-import { popupAddCard, openPopupAddCard, popupImage, popupDeleteCard } from '../utils/constants.js';
+import { popupAddCard, openPopupAddCard, popupImage, popupDeleteCard, popupEditAvatar, avatarForm, linkAvatar } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -52,6 +52,32 @@ const popupOpenImage = new PopupWithImage({ popup: popupImage });
 // закрытие попапа картинки
 popupOpenImage.setEventListeners();
 
+// экземпляр класса открытие попапа редактирования аватар
+const popupAvatar = new PopupWithForm({
+  popup: popupEditAvatar,
+  handleFormSubmit: () => {
+    api.editAvatar({
+      bodyAvatar:  JSON.stringify({
+        avatar: linkAvatar.value
+      })
+    })
+    .then((data) => {
+      avatar.src = data.avatar;
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+    popupAvatar.close();
+  }
+});
+
+avatar.addEventListener('click', function() {
+  popupAvatar.open();
+});
+// закрытие попапа редактирования аватар
+//popupAvatar.close();
+popupAvatar.setEventListeners();
+
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
@@ -70,7 +96,6 @@ api.getAllNeededData()
   aboutMeAvatar.textContent = dateFormUser.about;
   avatar.src = dateFormUser.avatar;
   
-  console.log(dateCards);
   addCards.renderItems(dateCards);
 })
 .catch((err) => {
@@ -179,3 +204,7 @@ profileFormValidator.enableValidation();
 // проверка на валидность полей добавления крточки
 const cardFormValidator = new FormValidator(config, cardForm);
 cardFormValidator.enableValidation();
+
+// проверка на валидность поля редактирования аватар
+const avatarFormValidator = new FormValidator(config, avatarForm);
+avatarFormValidator.enableValidation();

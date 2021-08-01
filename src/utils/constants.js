@@ -1,39 +1,13 @@
 export { keyEscape, config, cardSelector, profileForm, cardForm };
 export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, formEditProfile, nameInput, aboutMeInput};
 export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo, popupDeleteCard};
-export {popupImage, closePopupImage, popupImageContent, popupImageTitle};
-
-// const initialCards = [
-//     {
-//       name: 'Архыз',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//     },
-//     {
-//       name: 'Челябинская область',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//     },
-//     {
-//       name: 'Иваново',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//     },
-//     {
-//       name: 'Камчатка',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//     },
-//     {
-//       name: 'Холмогорский район',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//     },
-//     {
-//       name: 'Байкал',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//     }
-// ];
+export {popupImage, closePopupImage, popupImageContent, popupImageTitle, popupEditAvatar, avatarForm, linkAvatar };
 
 const keyEscape = 'Escape';
 
 const profileForm = '#profileFormValidator';
 const cardForm = '#cardFormValidator';
+const avatarForm = '#avatarFormValidator';
 
 const config = {
   //formSelector: '.form',
@@ -79,3 +53,7 @@ const popupImageTitle = popupImage.querySelector('.images-content__title');
 
 // popup удаления карточки
 const popupDeleteCard = document.querySelector('.popup_type_delete-card');
+
+// popup редактирования аватар
+const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
+const linkAvatar = popupEditAvatar.querySelector('.form__text_edit_about-me');
