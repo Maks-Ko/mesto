@@ -56,6 +56,7 @@ popupOpenImage.setEventListeners();
 const popupAvatar = new PopupWithForm({
   popup: popupEditAvatar,
   handleFormSubmit: () => {
+    renderLoading(true, { popup: popupEditAvatar });
     api.editAvatar({
       bodyAvatar:  JSON.stringify({
         avatar: linkAvatar.value
@@ -66,16 +67,30 @@ const popupAvatar = new PopupWithForm({
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, { popup: popupEditAvatar });
+      popupAvatar.close();
     });
-    popupAvatar.close();
   }
 });
 
+function renderLoading(isLoading, { popup }) {
+  const status = popup.querySelector('.form__button');
+  if(isLoading) {    
+    status.textContent = "Сохранение...";
+    console.log(status.textContent);
+  } else {
+    status.textContent = "Сохранить";
+    console.log(status.textContent);
+  }
+}
+
 avatar.addEventListener('click', function() {
+  cardFormValidator.toggleButtonState();
   popupAvatar.open();
 });
 // закрытие попапа редактирования аватар
-//popupAvatar.close();
 popupAvatar.setEventListeners();
 
 
@@ -107,6 +122,7 @@ const popupUserForm = new PopupWithForm({
   popup: popupEditProfile,
   handleFormSubmit: () => {
     // редактирование профиля на сервере
+    renderLoading(true, { popup: popupEditProfile });
     api.editProfile({
       bodyUser: JSON.stringify({
         name: nameInput.value,
@@ -121,8 +137,11 @@ const popupUserForm = new PopupWithForm({
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, { popup: popupEditProfile });
+      popupUserForm.close();
     });
-    popupUserForm.close();
   }
 });
 
@@ -143,6 +162,7 @@ popupUserForm.setEventListeners();
 const formCard = new PopupWithForm({
   popup: popupAddCard,
   handleFormSubmit: () => {
+    renderLoading(true, { popup: popupAddCard });
     // добавление карточки на сервер
     api.addCardForm({
       bodyAddCard: JSON.stringify({
@@ -156,8 +176,11 @@ const formCard = new PopupWithForm({
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, { popup: popupAddCard });
+      formCard.close();
     });
-    formCard.close();
   }
 });
 
