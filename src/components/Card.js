@@ -21,15 +21,9 @@ export default class Card {
   // создаём новую карточку
   generateCard () {
     this._element = this._getTemplate ();
-    //this._cardLike ();
     this.cardLikeNumder();
     this._addDeleteButtonCard();
-    //this.isLike();
-    
-    this._deleteCard();
-    this._likeCard()
-    this._openPopupImage();
-
+    this._setEventListeners();
     this._image = this._element.querySelector('.element__foto');      
     this._element.querySelector('.element__title').textContent = this._name;
     this._image.src = this._link;
@@ -53,8 +47,7 @@ export default class Card {
 
   // кнопка лайка карточки
   isLikeButton(data) {
-    this._result = data.likes.filter(item => item._id == 'e8f05256dab4a2c5dbaf43a4');
-    this._isLike = this._result.length > 0;
+    this._isLike = data.likes.filter(item => item._id == 'e8f05256dab4a2c5dbaf43a4').length > 0;
     this._element.querySelector('.element__numder-likes').textContent = data.likes.length;
     if (this._isLike) {
       this._element.querySelector('.element__like').classList.add('element__like_active');
@@ -77,24 +70,21 @@ export default class Card {
     this._element = null;
   }
 
-  // слушатель удаления карточки
-  _deleteCard() {
+  // слущатели событий
+  _setEventListeners() {
+    // слушатель удаления карточки
     this._element.querySelector('.element__delete').addEventListener('click', (evt) => {
       evt.preventDefault();
       this._handleDeleteCard(this);
     });
-  }
-  
-  // слушатель лайа карточки
-  _likeCard() {
+
+    // слушатель лайа карточки
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
       evt.preventDefault();
       this._handleLikeCard(this);      
     });
-  }
 
-  // слушатель открытия попапа картинки
-  _openPopupImage () {
+    // слушатель открытия попапа картинки
     this._element.querySelector('.element__foto').addEventListener('click', (evt) => {
       evt.preventDefault();
       this._handlePopupImageCard(this._name, this._link);
