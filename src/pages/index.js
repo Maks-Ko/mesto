@@ -1,7 +1,7 @@
 import './index.css';
 
 import { config, cardSelector, profileForm, cardForm } from '../utils/constants.js';
-import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar, avatar } from '../utils/constants.js';
+import { openEditProfileButton, popupEditProfile, nameInput, aboutMeInput, nameAvatar, aboutMeAvatar, avatar, avatarActiv } from '../utils/constants.js';
 import { popupAddCard, openPopupAddCard, popupImage, popupDeleteCard, popupEditAvatar, avatarForm, linkAvatar } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -100,7 +100,7 @@ const popupAvatar = new PopupWithForm({
 });
 
 // открытие попапа редактирования аватвр
-avatar.addEventListener('click', function() {
+avatarActiv.addEventListener('click', function() {
   cardFormValidator.toggleButtonState();
   popupAvatar.open();
 });
@@ -126,12 +126,10 @@ api.getAllNeededData()
   avatar.src = dateFormUser.avatar;
   
   addCards.renderItems(dateCards, dateFormUser._id);
-  console.log(dateFormUser._id);
 })
 .catch((err) => {
   console.log(err); // "Что-то пошло не так: ..."
 });
-
 
 // функция добавления катрочик через сервер
 function addCardForm() {

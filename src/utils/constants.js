@@ -1,5 +1,5 @@
 export { keyEscape, config, cardSelector, profileForm, cardForm };
-export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, formEditProfile, nameInput, aboutMeInput};
+export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, avatarActiv, formEditProfile, nameInput, aboutMeInput};
 export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo, popupDeleteCard};
 export {popupImage, closePopupImage, popupImageContent, popupImageTitle, popupEditAvatar, avatarForm, linkAvatar };
 
@@ -28,6 +28,7 @@ const closeEditProfileButton = document.querySelector('.popup__button_profile');
 const nameAvatar = document.querySelector('.profile-info__title');
 const aboutMeAvatar = document.querySelector('.profile-info__text');
 const avatar = document.querySelector('.profile__avatar');
+const avatarActiv = document.querySelector('.profile__avatar_activ');
 const formEditProfile = document.querySelector('.form_profile');
 const nameInput = formEditProfile.querySelector('.form__text_edit_name');
 const aboutMeInput = formEditProfile.querySelector('.form__text_edit_about-me');
