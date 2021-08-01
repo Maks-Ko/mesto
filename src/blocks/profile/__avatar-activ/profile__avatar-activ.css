@@ -1,4 +1,4 @@
-.profile__avatar_activ {
+.profile__avatar-activ {
     position: absolute;
     background-color: black;
     background-image: url(../../../../images/Vector_pen.png);
@@ -11,13 +11,13 @@
     opacity: 0;
 }
 
-.profile__avatar_activ:hover {
+.profile__avatar-activ:hover {
     cursor: pointer;
     opacity: 0.5;
 }
 
 @media (max-width: 730px) {
-    .profile__avatar_activ {
+    .profile__avatar-activ {
         margin: 0 0 24px;
     }
 }
