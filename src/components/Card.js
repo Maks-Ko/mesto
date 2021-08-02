@@ -1,10 +1,11 @@
 export default class Card {
-  constructor (cardData, cardSelector, { handlePopupImageCard, handleDeleteCard, handleleLikeCard }) {
+  constructor (cardData, cardSelector, { userId, handlePopupImageCard, handleDeleteCard, handleleLikeCard }) {
       this._name = cardData.name;
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
-      this._idUser = cardData.owner._id;
+      this._idUserCard = cardData.owner._id;
       this._idCard = cardData._id;
+      this._userId = userId;
       this._cardSelector = cardSelector;
       this._handlePopupImageCard = handlePopupImageCard;
       this._handleDeleteCard = handleDeleteCard;
@@ -35,7 +36,7 @@ export default class Card {
   // количество лайков
   cardLikeNumder() {
     this._element.querySelector('.element__numder-likes').textContent = this._numberLikes.length;
-    if (this._numberLikes.filter(item => item._id == 'e8f05256dab4a2c5dbaf43a4').length > 0) {
+    if (this._numberLikes.filter(item => item._id == this._userId).length > 0) {
       this._element.querySelector('.element__like').classList.add('element__like_active');
     }
   }
@@ -47,7 +48,7 @@ export default class Card {
 
   // кнопка лайка карточки
   isLikeButton(data) {
-    this._isLike = data.likes.filter(item => item._id == 'e8f05256dab4a2c5dbaf43a4').length > 0;
+    this._isLike = data.likes.filter(item => item._id == this._userId).length > 0;
     this._element.querySelector('.element__numder-likes').textContent = data.likes.length;
     if (this._isLike) {
       this._element.querySelector('.element__like').classList.add('element__like_active');
@@ -59,7 +60,7 @@ export default class Card {
   // убирает кнопку удаления крточки
   _addDeleteButtonCard() {
     // this._idUser = this._user._id;
-    if (this._idUser == 'e8f05256dab4a2c5dbaf43a4') {
+    if (this._idUserCard == this._userId) {
       this._element.querySelector('.element__delete').classList.add('element__delete_show');
     }
   }

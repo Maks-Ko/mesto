@@ -13,12 +13,15 @@ import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
+let userId = '';
+
 // экземпляр класса добавление карточек
 const addCards = new Section({ renderer: rendererCsrds }, '.elements');
 
 // экземпляр класса создания карточки
 function createCard (cardData) {
   const createCard = new Card(cardData, cardSelector, {
+    userId: userId,
     handlePopupImageCard: (name, link) => {
       popupOpenImage.open(name, link);
     },
@@ -68,7 +71,7 @@ const popupOpenImage = new PopupWithImage({ popup: popupImage });
 popupOpenImage.setEventListeners();
 
 // экземпляр класса профиля
-const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar });
+const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAvatar, userAvatar: avatar });
 
 // экземпляр класса редактирования профиля через форму
 const popupUserForm = new PopupWithForm({
@@ -120,12 +123,16 @@ const api = new Api({
 api.getAllNeededData()
 .then((date) => {
   const [ dateFormUser, dateCards] = date;
-
-  nameAvatar.textContent = dateFormUser.name;
-  aboutMeAvatar.textContent = dateFormUser.about;
-  avatar.src = dateFormUser.avatar;
+  userId = dateFormUser._id;
   
-  addCards.renderItems(dateCards, dateFormUser._id);
+  userInfo.setUserInfo(dateFormUser);
+  userInfo.updateUserInfo();  
+  // nameAvatar.textContent = dateFormUser.name;
+  // aboutMeAvatar.textContent = dateFormUser.about;
+
+  //avatar.src = dateFormUser.avatar;
+  
+  addCards.renderItems(dateCards);
 })
 .catch((err) => {
   console.log(err); // "Что-то пошло не так: ..."
@@ -163,10 +170,8 @@ function editProfile() {
       })
     })
     .then((data) => {
-      userInfo.setUserInfo({
-        userNameInput:  data.name,
-        userProfessionInput: data.about
-      });
+      userInfo.setUserInfo(data);
+      userInfo.updateUserInfo();
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
@@ -186,7 +191,8 @@ function editAvatar() {
       })
     })
     .then((data) => {
-      avatar.src = data.avatar;
+      userInfo.setUserInfo(data);
+      userInfo.updateUserAvatar();
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
