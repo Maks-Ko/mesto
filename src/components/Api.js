@@ -9,12 +9,7 @@ export default class Api {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._checkResponse)
     }
 
     // получаем данные карточек
@@ -22,12 +17,7 @@ export default class Api {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);            
-        })
+        .then(this._checkResponse)
     }
 
     getAllNeededData() {
@@ -41,12 +31,7 @@ export default class Api {
             headers: this._headers,
             body: bodyUser
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);            
-        })
+        .then(this._checkResponse)
     }
 
     // добавление карточки
@@ -56,12 +41,7 @@ export default class Api {
             headers: this._headers,
             body: bodyAddCard
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);            
-        })
+        .then(this._checkResponse)
     }
 
     // удаление карточки
@@ -70,12 +50,7 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);            
-        })
+        .then(this._checkResponse)
     }
 
     // добавление - удаление лайка карточки    
@@ -84,12 +59,7 @@ export default class Api {
             method: isLike ? 'DELETE' : 'PUT',
             headers: this._headers,
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);            
-        })
+        .then(this._checkResponse)
     }
 
     // редактирование аватар
@@ -99,11 +69,13 @@ export default class Api {
             headers: this._headers,
             body: bodyAvatar
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._checkResponse)
+    }
+
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
     }
 }
