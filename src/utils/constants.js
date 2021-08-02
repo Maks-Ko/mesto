@@ -1,8 +1,3 @@
-export { keyEscape, config, cardSelector, profileForm, cardForm };
-export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, avatarActiv, formEditProfile, nameInput, aboutMeInput};
-export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo, popupDeleteCard};
-export {popupImage, closePopupImage, popupImageContent, popupImageTitle, popupEditAvatar, avatarForm, linkAvatar };
-
 const keyEscape = 'Escape';
 
 const profileForm = '#profileFormValidator';
@@ -58,3 +53,8 @@ const popupDeleteCard = document.querySelector('.popup_type_delete-card');
 // popup редактирования аватар
 const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
 const linkAvatar = popupEditAvatar.querySelector('.form__text_edit_about-me');
+
+export { keyEscape, config, cardSelector, profileForm, cardForm };
+export { openEditProfileButton, popupEditProfile, closeEditProfileButton, nameAvatar, aboutMeAvatar, avatar, avatarActiv, formEditProfile, nameInput, aboutMeInput};
+export { popupAddCard, openPopupAddCard, closePopupAddCard, formAddCard, inputCardName, inputCardPhto, cardContainer, dataUserInfo, popupDeleteCard};
+export {popupImage, closePopupImage, popupImageContent, popupImageTitle, popupEditAvatar, avatarForm, linkAvatar };
