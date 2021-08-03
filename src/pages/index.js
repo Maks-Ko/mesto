@@ -44,8 +44,8 @@ function rendererCsrds(cardData) {
 // экземпляр класса добавление карточки через форму
 const formCard = new PopupWithForm({
   popup: popupAddCard,
-  handleFormSubmit: () => {
-    addCardForm();
+  handleFormSubmit: (data) => {
+    addCardForm(data);
   }
 });
 
@@ -76,8 +76,8 @@ const userInfo = new UserInfo({ userName: nameAvatar, userProfession: aboutMeAva
 // экземпляр класса редактирования профиля через форму
 const popupUserForm = new PopupWithForm({
   popup: popupEditProfile,
-  handleFormSubmit: () => {
-    editProfile();
+  handleFormSubmit: (data) => {
+    editProfile(data);
   }
 });
 
@@ -97,8 +97,8 @@ popupUserForm.setEventListeners();
 // экземпляр класса попапа редактирования аватар
 const popupAvatar = new PopupWithForm({
   popup: popupEditAvatar,
-  handleFormSubmit: () => {
-    editAvatar();
+  handleFormSubmit: (data) => {
+    editAvatar(data);
   }
 });
 
@@ -139,14 +139,9 @@ api.getAllNeededData()
 });
 
 // функция добавления катрочик через сервер
-function addCardForm() {
+function addCardForm(dataCard) {
   renderLoading(true, { popup: popupAddCard });
-    api.addCardForm({
-      bodyAddCard: JSON.stringify({
-        name: image_name.value,
-        link: url_image.value
-      })
-    })
+    api.addCardForm(dataCard)
     .then((data) => {
       const cards = createCard(data);
       addCards.addItem(cards);      
@@ -161,14 +156,9 @@ function addCardForm() {
   }
 
 // функция редактирования профиля через сервер
-function editProfile() {
+function editProfile(dataUser) {
   renderLoading(true, { popup: popupEditProfile });
-    api.editProfile({
-      bodyUser: JSON.stringify({
-        name: nameInput.value,
-        about: aboutMeInput.value
-      })
-    })
+    api.editProfile(dataUser)
     .then((data) => {
       userInfo.setUserInfo(data);
       userInfo.updateUserInfo();
@@ -183,13 +173,9 @@ function editProfile() {
 }
 
 // функция изменеия аватар через сервер
-function editAvatar() {
+function editAvatar(dataAvatar) {
   renderLoading(true, { popup: popupEditAvatar });
-    api.editAvatar({
-      bodyAvatar:  JSON.stringify({
-        avatar: linkAvatar.value
-      })
-    })
+    api.editAvatar(dataAvatar)
     .then((data) => {
       userInfo.setUserInfo(data);
       userInfo.updateUserAvatar();

@@ -25,21 +25,27 @@ export default class Api {
     }
 
     // редактирование профиля
-    editProfile({ bodyUser }) {
+    editProfile(dataUser) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
-            body: bodyUser
+            body: JSON.stringify({
+                name: dataUser.user_name,
+                about: dataUser.activity
+            })
         })
         .then(this._checkResponse)
     }
 
     // добавление карточки
-    addCardForm({ bodyAddCard }) {
+    addCardForm(dataCard) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: bodyAddCard
+            body: JSON.stringify({
+                name: dataCard.image_name,
+                link: dataCard.url_image
+            })
         })
         .then(this._checkResponse)
     }
@@ -63,11 +69,13 @@ export default class Api {
     }
 
     // редактирование аватар
-    editAvatar({ bodyAvatar }) {
+    editAvatar(dataAvatar) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
-            body: bodyAvatar
+            body: JSON.stringify({
+                avatar: dataAvatar.url_avatar
+              })
         })
         .then(this._checkResponse)
     }
