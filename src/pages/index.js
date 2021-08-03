@@ -149,14 +149,14 @@ function addCardForm() {
     })
     .then((data) => {
       const cards = createCard(data);
-      addCards.addItem(cards);
+      addCards.addItem(cards);      
+      formCard.close();
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
       renderLoading(false, { popup: popupAddCard });
-      formCard.close();
     });
   }
 
@@ -172,13 +172,13 @@ function editProfile() {
     .then((data) => {
       userInfo.setUserInfo(data);
       userInfo.updateUserInfo();
+      popupUserForm.close();
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
-      renderLoading(false, { popup: popupEditProfile });
-      popupUserForm.close();
+      renderLoading(false, { popup: popupEditProfile });      
     });
 }
 
@@ -193,13 +193,13 @@ function editAvatar() {
     .then((data) => {
       userInfo.setUserInfo(data);
       userInfo.updateUserAvatar();
+      popupAvatar.close();
     })
     .catch((err) => {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
-      renderLoading(false, { popup: popupEditAvatar });
-      popupAvatar.close();
+      renderLoading(false, { popup: popupEditAvatar });      
     });
 
 }
