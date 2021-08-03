@@ -4,7 +4,7 @@ export default class Card {
       this._link = cardData.link;
       this._numberLikes = cardData.likes;
       this._idUserCard = cardData.owner._id;
-      this._idCard = cardData._id;
+      this.idCard = cardData._id;
       this._userId = userId;
       this._cardSelector = cardSelector;
       this._handlePopupImageCard = handlePopupImageCard;
@@ -42,15 +42,15 @@ export default class Card {
   }
 
   // возращает true ели лайк поставлен или false если лайк отсутсвует
-  isLike() {
-    return this._isLike;
+  isLikes() {
+    return this.isLike;
   }
 
   // кнопка лайка карточки
   isLikeButton(data) {
-    this._isLike = data.likes.filter(item => item._id == this._userId).length > 0;
+    this.isLike = data.likes.filter(item => item._id == this._userId).length > 0;
     this._element.querySelector('.element__numder-likes').textContent = data.likes.length;
-    if (this._isLike) {
+    if (this.isLike) {
       this._element.querySelector('.element__like').classList.add('element__like_active');
     } else {
       this._element.querySelector('.element__like').classList.remove('element__like_active');

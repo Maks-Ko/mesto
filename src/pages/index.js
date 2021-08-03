@@ -231,8 +231,8 @@ function cardDelete(cardInstance) {
 
 // функция лайка карточки через сервер
 function likeCard(cardInstance) {
-  cardInstance.isLike();
-  api.toggleLikeCard(cardInstance._idCard, cardInstance._isLike)
+  cardInstance.isLikes();
+  api.toggleLikeCard(cardInstance.idCard, cardInstance.isLike)
   .then((data) => {
     cardInstance.isLikeButton(data);
   })
