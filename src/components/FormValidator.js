@@ -20,7 +20,7 @@ export default class FormValidator {
 
     // метод, который находит, перебирает и добоаляет каждому полю событие input
     _setEventListeners() {
-        this.toggleButtonState();
+        //this.toggleButtonState();
 
         this._inputList.forEach((inputElement) => {
             // каждому полю добавим обработчик событий input
@@ -29,13 +29,20 @@ export default class FormValidator {
                 this._isValid(inputElement);
 
                 // вызовем toggleButtonState и передадим ей массив полей и кнопку
-                this.toggleButtonState();
+                this._toggleButtonState();
             });
         });
     }
 
+    resetValidation() {
+        this._toggleButtonState();
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+        });
+    }
+
     // метод переключения кнопки: активная, неактивная
-    toggleButtonState = () => {
+    _toggleButtonState = () => {
         if (this._hazInvalidInput(this._inputList)) {
             this._buttonElement.disabled = true;
         } else {

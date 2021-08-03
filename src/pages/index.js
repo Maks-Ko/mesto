@@ -51,7 +51,7 @@ const formCard = new PopupWithForm({
 
 // открытие попапа добавления карточки
 openPopupAddCard.addEventListener('click', function() {
-  cardFormValidator.toggleButtonState();
+  cardFormValidator.resetValidation();
   formCard.open();
 });
 
@@ -83,6 +83,7 @@ const popupUserForm = new PopupWithForm({
 
 // открытие попапа редактирования профиля
 openEditProfileButton.addEventListener('click', function() {
+  profileFormValidator.resetValidation();
   const userInfoIput = userInfo.getUserInfo();
   
   nameInput.value = userInfoIput.name;
@@ -104,7 +105,7 @@ const popupAvatar = new PopupWithForm({
 
 // открытие попапа редактирования аватвр
 avatarActiv.addEventListener('click', function() {
-  avatarFormValidator.toggleButtonState();
+  avatarFormValidator.resetValidation();
   popupAvatar.open();
 });
 // закрытие попапа редактирования аватар
