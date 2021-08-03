@@ -27,16 +27,4 @@ export default class UserInfo {
         this._userInfo.profession =  this._userProfession.textContent;
         return this._userInfo;
     }
-
-    // // метод который обнавляет данные на странице
-    // updateUserInfo() {
-    //     this._userName.textContent = this._name;
-    //     this._userProfession.textContent = this._profession;
-    //     this._userAvatar.src = this._avatar;
-    // }
-
-    // // метод который обнавляет аватар
-    // updateUserAvatar() {
-    //     this._userAvatar.src = this._avatar;
-    // }
 }
