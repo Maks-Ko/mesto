@@ -104,7 +104,7 @@ const popupAvatar = new PopupWithForm({
 
 // открытие попапа редактирования аватвр
 avatarActiv.addEventListener('click', function() {
-  cardFormValidator.toggleButtonState();
+  avatarFormValidator.toggleButtonState();
   popupAvatar.open();
 });
 // закрытие попапа редактирования аватар
