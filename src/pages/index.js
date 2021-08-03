@@ -126,12 +126,6 @@ api.getAllNeededData()
   userId = dateFormUser._id;
   
   userInfo.setUserInfo(dateFormUser);
-  userInfo.updateUserInfo();  
-  // nameAvatar.textContent = dateFormUser.name;
-  // aboutMeAvatar.textContent = dateFormUser.about;
-
-  //avatar.src = dateFormUser.avatar;
-  
   addCards.renderItems(dateCards);
 })
 .catch((err) => {
@@ -161,7 +155,6 @@ function editProfile(dataUser) {
     api.editProfile(dataUser)
     .then((data) => {
       userInfo.setUserInfo(data);
-      userInfo.updateUserInfo();
       popupUserForm.close();
     })
     .catch((err) => {
@@ -178,7 +171,6 @@ function editAvatar(dataAvatar) {
     api.editAvatar(dataAvatar)
     .then((data) => {
       userInfo.setUserInfo(data);
-      userInfo.updateUserAvatar();
       popupAvatar.close();
     })
     .catch((err) => {

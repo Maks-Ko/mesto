@@ -8,11 +8,14 @@ export default class UserInfo {
         this._avatar = '';
     }
     
-    // метод который принимает данные
+    // метод который принимает и обновляет данные
     setUserInfo(data) {
         this._name = data.name;
         this._profession = data.about;
         this._avatar = data.avatar;
+        this._userName.textContent = this._name;
+        this._userProfession.textContent = this._profession;
+        this._userAvatar.src = this._avatar;
     }
 
 
@@ -25,15 +28,15 @@ export default class UserInfo {
         return this._userInfo;
     }
 
-    // метод который обнавляет данные на странице
-    updateUserInfo() {
-        this._userName.textContent = this._name;
-        this._userProfession.textContent = this._profession;
-        this._userAvatar.src = this._avatar;
-    }
+    // // метод который обнавляет данные на странице
+    // updateUserInfo() {
+    //     this._userName.textContent = this._name;
+    //     this._userProfession.textContent = this._profession;
+    //     this._userAvatar.src = this._avatar;
+    // }
 
-    // метод который обнавляет аватар
-    updateUserAvatar() {
-        this._userAvatar.src = this._avatar;
-    }
+    // // метод который обнавляет аватар
+    // updateUserAvatar() {
+    //     this._userAvatar.src = this._avatar;
+    // }
 }
