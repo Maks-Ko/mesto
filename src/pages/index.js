@@ -134,7 +134,7 @@ api.getAllNeededData()
 
 // функция добавления катрочик через сервер
 function addCardForm(dataCard) {
-  renderLoading(true, { popup: popupAddCard });
+  formCard.renderLoading({ isLoading: true });
     api.addCardForm(dataCard)
     .then((data) => {
       const cards = createCard(data);
@@ -145,13 +145,13 @@ function addCardForm(dataCard) {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
-      renderLoading(false, { popup: popupAddCard });
+      formCard.renderLoading({ isLoading: false });
     });
   }
 
 // функция редактирования профиля через сервер
 function editProfile(dataUser) {
-  renderLoading(true, { popup: popupEditProfile });
+  popupUserForm.renderLoading({ isLoading: true });
     api.editProfile(dataUser)
     .then((data) => {
       userInfo.setUserInfo(data);
@@ -161,13 +161,13 @@ function editProfile(dataUser) {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
-      renderLoading(false, { popup: popupEditProfile });      
+      popupUserForm.renderLoading({ isLoading: false });
     });
 }
 
 // функция изменеия аватар через сервер
 function editAvatar(dataAvatar) {
-  renderLoading(true, { popup: popupEditAvatar });
+  popupAvatar.renderLoading({isLoading: true});
     api.editAvatar(dataAvatar)
     .then((data) => {
       userInfo.setUserInfo(data);
@@ -177,19 +177,9 @@ function editAvatar(dataAvatar) {
       console.log(err); // "Что-то пошло не так: ..."
     })
     .finally(() => {
-      renderLoading(false, { popup: popupEditAvatar });      
+      popupAvatar.renderLoading({ isLoading: false });      
     });
 
-}
-
-// функция уведомления пользователя о сохранении данных
-function renderLoading(isLoading, { popup }) {
-  const status = popup.querySelector('.form__button');
-  if(isLoading) {    
-    status.textContent = "Сохранение...";
-  } else {
-    status.textContent = "Сохранить";
-  }
 }
 
 // функция удаления карточки через сервер

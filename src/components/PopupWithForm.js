@@ -21,6 +21,17 @@ export default class PopupWithForm extends Popup {
 
         return this._formValues;
     }
+    
+    // метод уведомления пользователя о сохранении данных
+    renderLoading({ isLoading }) {
+        this._status = this._form.querySelector('.form__button');
+        if(isLoading) {
+            this._status.textContent = "Сохранение...";
+        } else {
+            this._status.textContent = "Сохранить";
+        }
+
+    } 
 
     setEventListeners() {
         super.setEventListeners();
