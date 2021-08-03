@@ -203,7 +203,7 @@ function renderLoading(isLoading, { popup }) {
 // функция удаления карточки через сервер
 function cardDelete(cardInstance) {
   popupOpenDeleteCard.setSubmitAction(() => {
-    api.deleteCardUser(cardInstance._idCard)
+    api.deleteCardUser(cardInstance.idCard)
     .then(() => {
       cardInstance.cardDelete();
       popupOpenDeleteCard.close();
